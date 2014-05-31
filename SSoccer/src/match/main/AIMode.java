@@ -18,7 +18,7 @@ public class AIMode {
 
 		GraphicMain gm = new GraphicMain(home, away);
 		new Thread(new AIModeThread(gm)).start();
-		new EditStrategy(home, gm.homeInfo).startEdit();
+		new EditStrategy(home, gm.homeInfo);
 	}
 
 	// 임시 메소드. 팀과 그 팀의 구성원들을 생성.
@@ -36,6 +36,9 @@ public class AIMode {
 			team.player[i].steal = 70;
 			team.player[i].gk = 70;
 		}
+		team.colorR = (int) (Math.random() * 256);
+		team.colorG = (int) (Math.random() * 256);
+		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
 

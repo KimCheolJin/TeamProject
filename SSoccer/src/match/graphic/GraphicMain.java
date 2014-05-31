@@ -1,12 +1,8 @@
 package match.graphic;
 
-import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import match.data.MTeam;
 
 public class GraphicMain extends JFrame {
@@ -49,12 +45,12 @@ public class GraphicMain extends JFrame {
 	}
 
 	public void setEmblem(){
-		ImageIcon homeImg = new ImageIcon("res/img/emblem/"+home.name+".png");
+		ImageIcon homeImg = new ImageIcon("res/emblem/"+home.name+".png");
 		JLabel homeEmblem = new JLabel(homeImg);
 		homeEmblem.setBounds(0,0,200,200);
 		add(homeEmblem);
 		
-		ImageIcon awayImg = new ImageIcon("res/img/emblem/"+away.name+".png");
+		ImageIcon awayImg = new ImageIcon("res/emblem/"+away.name+".png");
 		JLabel awayEmblem = new JLabel(awayImg);
 		awayEmblem.setBounds(920,0,200,200);
 		add(awayEmblem);

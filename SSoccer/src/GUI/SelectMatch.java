@@ -1,20 +1,19 @@
 package GUI;
 
-import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SelectMatch extends JPanel {
 
-	public SelectMatch() {
+	Image img;
+	
+	public SelectMatch(Image img) {
+		this.img = img;
 		setLayout(null);
-		setSize(542, 382);
+		setSize(540, 380);
 		
 		JButton aimode = new JButton("AI ´ëÀü");
 		aimode.setBounds(200, 50, 130, 50);
@@ -28,14 +27,13 @@ public class SelectMatch extends JPanel {
 		
 		add(new bg());
 	}
-
+	
 	public class bg extends JPanel {
 		bg(){
-			setBounds(0,0,545,372);
+			setBounds(0,0,540,380);
 		}
 		public void paint(Graphics g) {
-			Image img = new ImageIcon("res/img/Soccer.jpg").getImage();
-			g.drawImage(img, 0, 0, 545, 372, this);
+			g.drawImage(img, 0, 0, 540, 380, this);
 		}
 	}
 	
@@ -43,14 +41,5 @@ public class SelectMatch extends JPanel {
 
 
 	}
-
-	public static void main(String args[]) {
-		JFrame jf = new JFrame("StrategyEdit");
-		jf.setSize(550, 400);
-		SelectMatch sm = new SelectMatch();
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setResizable(false);
-		jf.add(sm);
-		jf.setVisible(true);
-	}
+	
 }

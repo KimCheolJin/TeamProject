@@ -50,7 +50,7 @@ public class Server {
 			GraphicMain gm = new GraphicMain(home, away);
 			new Thread(new ServerThread(gm, oos)).start();
 			new Thread(new StrategyThread(oism, away, gm)).start();
-			new EditStrategy(home, gm.homeInfo, oosm).startEdit();
+			new EditStrategy(home, gm.homeInfo, oosm);
 			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,6 +75,9 @@ public class Server {
 			team.player[i].steal = 70;
 			team.player[i].gk = 70;
 		}
+		team.colorR = (int) (Math.random() * 256);
+		team.colorG = (int) (Math.random() * 256);
+		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
 	

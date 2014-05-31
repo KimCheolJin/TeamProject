@@ -1,14 +1,9 @@
 package match.main;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-
+import data.TemporaryTeam;
 import match.data.MTeam;
-import match.data.SendingStrategy;
 import match.data.setDLocation;
 import match.graphic.GraphicMain;
 
@@ -27,7 +22,7 @@ public class StrategyThread implements Runnable {
 	public void run() {
 		while(true) {
 			try {
-				SendingStrategy ss = (SendingStrategy) ois.readObject();
+				TemporaryTeam ss = (TemporaryTeam) ois.readObject();
 				ss.getData(team);
 				gm.homeInfo.draw();
 				gm.awayInfo.draw();

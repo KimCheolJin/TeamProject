@@ -1,12 +1,7 @@
 package login;
 
-import java.awt.*;
-
-import javax.swing.*;
-
 import login.Join;
 import DBCENTER.*;
-import friend.*;
 
 @SuppressWarnings("serial")
 public class Login extends javax.swing.JFrame {

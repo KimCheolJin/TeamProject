@@ -1,9 +1,7 @@
 package match.data;
 
-import data.Player;
 import match.player.Attacker;
 import match.player.Defender;
-import match.player.Goalkeeper;
 import match.player.Midfielder;
 
 public class setDLocation {

@@ -2,13 +2,10 @@ package match.main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import match.data.Ball;
 import match.data.MTeam;
 import match.data.SendingData;
 import match.graphic.GraphicMain;
-import match.main.MatchThread.Checkfps;
 
 public class ClientThread implements Runnable {
 

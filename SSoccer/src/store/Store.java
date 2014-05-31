@@ -1,9 +1,5 @@
 package store;
 
-import data.SPlayer;
-
-import javax.swing.JList;
-
 import java.util.ArrayList;
 
 public class Store {
@@ -25,9 +21,10 @@ public class Store {
 	
 	
 	//신규선수 목록에 선수 추가
-	public void addnewPlayer(String n, int s, int d, int p,int st, int tk, int sl, int sp, int gk,int price, int exp){
+	public void addnewPlayer(String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp, int pN, int price){
 		
-		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,price,exp);
+		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,exp,pN,price);
 		newPlayer.add(temp);
 		np.add(temp.toString());
 		
@@ -35,9 +32,10 @@ public class Store {
 	}
 	
 	//기존선수 목록에 선수 추가
-	public void addoldPlayer(String n, int s, int d, int p,int st, int tk, int sl, int sp, int gk, int price, int exp){
+	public void addoldPlayer(String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp, int pN, int price){
 		
-		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,price,exp);
+		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,exp,pN,price);
 		oldPlayer.add(temp);
 		op.add(temp.toString());
 	}

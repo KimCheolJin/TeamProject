@@ -1,12 +1,9 @@
 package match.data;
 
-import java.io.Serializable;
-
 import match.player.Attacker;
 import match.player.Defender;
 import match.player.Goalkeeper;
 import match.player.Midfielder;
-import data.Player;
 import data.Team;
 
 public class MTeam extends Team {
@@ -17,6 +14,9 @@ public class MTeam extends Team {
 	public MTeam(Team t) {
 		super(t.name);
 		setPosition(t);
+		colorR = t.colorR;
+		colorG = t.colorG;
+		colorB = t.colorB;
 	}
 
 	private void setPosition(Team t) {

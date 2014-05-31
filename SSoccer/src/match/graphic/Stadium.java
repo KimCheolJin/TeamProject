@@ -30,11 +30,11 @@ public class Stadium extends JPanel implements MouseListener {
 	public void paint(Graphics g){
 		paintStadium(g);
 		for(int i = 0; i<11; i++){
-			g.setColor(new Color(255,0,0));
+			g.setColor(new Color(home.colorR, home.colorG, home.colorB));
 			paintPlayer(g, home.player[i]);
 		}
 		for(int i = 0; i<11; i++){
-			g.setColor(new Color(0,0,255));
+			g.setColor(new Color(away.colorR, away.colorG, away.colorB));
 			paintPlayer(g, away.player[i]);
 		}
 

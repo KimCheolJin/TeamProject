@@ -1,9 +1,5 @@
 package login;
 
-import java.awt.*;
-
-import javax.swing.*;
-
 import DBCENTER.*;
 
 @SuppressWarnings("serial")

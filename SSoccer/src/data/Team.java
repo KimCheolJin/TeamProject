@@ -14,6 +14,7 @@ public class Team implements Serializable {
 	public int strategyD = 5;
 	public int strategyT = 5;
 	public int strategyF = 4;
+	public int colorR, colorG, colorB;
 	
 	public Team(String name) {
 		this.name = name;

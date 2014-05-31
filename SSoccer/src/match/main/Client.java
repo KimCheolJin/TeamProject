@@ -50,7 +50,7 @@ public class Client  {
 			GraphicMain gm = new GraphicMain(home, away);
 			new Thread(new ClientThread(gm, ois)).start();
 			new Thread(new StrategyThread(oism, home, gm)).start();
-			new EditStrategy(away, gm.awayInfo, oosm).startEdit();
+			new EditStrategy(away, gm.awayInfo, oosm);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -76,11 +76,14 @@ public class Client  {
 			team.player[i].steal = 70;
 			team.player[i].gk = 70;
 		}
+		team.colorR = (int) (Math.random() * 256);
+		team.colorG = (int) (Math.random() * 256);
+		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
 	
 	public static void main(String args[]){
-		new Client(makeTeam("맨시티"), "61.74.29.248");
+		new Client(makeTeam("맨시티"), "127.0.0.1");
 	}
 
 }

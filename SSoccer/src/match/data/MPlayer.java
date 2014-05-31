@@ -29,20 +29,7 @@ public class MPlayer extends data.Player {
 		Y = p.Y;
 		goalX = p.goalX;
 	}
-	
-	public void copy(Player p) {
-		name = p.name;
-		shoot = p.shoot;
-		dribble = p.dribble;
-		pass = p.pass;
-		stamina = p.stamina;
-		speed = p.speed;
-		tackle = p.tackle;
-		steal = p.steal;
-		gk = p.gk;
-		
-	}
-	
+
 	public void copy(MPlayer p) {
 		copy((Player) p);
 		sp = p.sp;

@@ -1,85 +1,41 @@
 package match.graphic;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import data.TemporaryTeam;
 import match.data.MTeam;
-import match.data.SendingStrategy;
 import match.data.setDLocation;
 import GUI.SetStrategy;
 
 public class EditStrategy extends SetStrategy {
 
 	TeamInfo teaminfo;
-	
+	MTeam team;
+	ObjectOutputStream oosm;
+
+	//멀티플레이 모드 생성자
 	public EditStrategy(final MTeam team, final TeamInfo teaminfo, final ObjectOutputStream oosm) {
 		super(team);
+		this.team = team;
+		tTeam = new TemporaryTeam(team);
 		this.teaminfo = teaminfo;
-		JButton ok = new JButton("적용");
-		ok.setBounds(430, 300, 90, 50);
-		ok.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				boolean eleven = true;
-				
-				for(int i = 0; i < 11; i++){
-					System.out.println(sStrategy.player[i].name);
-					System.out.println("asdasd");
-					if(sStrategy.player[i].name == null){
-						eleven = false;
-						System.out.println(i);
-					}
-				}
-				
-				if(eleven){
-					sStrategy.getData(team);
-					if(team.player[0].goalX == 720) new setDLocation().setHomeFomation(team);
-					else new setDLocation().setAwayFomation(team);
-					teaminfo.draw();
-					try {
-						oosm.writeObject(sStrategy);
-						oosm.flush();
-						oosm.reset();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		add(ok);
+		this.oosm = oosm;
+		setFrame();
+		for (int i = 0; i < 22; i++) {
+			player[i].setText(tTeam.player[i].name);
+		}
 	}
 	
+	//AI 모드 생성자
 	public EditStrategy(final MTeam team, final TeamInfo teaminfo) {
-		super(team);
-		this.teaminfo = teaminfo;
-		JButton ok = new JButton("적용");
-		ok.setBounds(430, 300, 90, 50);
-		ok.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				boolean eleven = true;
-				
-				for(int i = 0; i < 11; i++){
-					if(sStrategy.player[i].name == null){
-						eleven = false;
-					}
-				}
-				
-				if(eleven){
-					sStrategy.getData(team);
-					if(team.player[0].goalX == 720) new setDLocation().setHomeFomation(team);
-					else new setDLocation().setAwayFomation(team);
-					teaminfo.draw();
-				}
-			}
-		});
-		add(ok);
+		this(team, teaminfo, null);
 	}
 	
-	public void startEdit(){
+	//JFrame 생성
+	public void setFrame(){
 		JFrame editor = new JFrame(team.name + " Edit");
 		editor.setContentPane(this);
 		editor.setSize(550, 400);
@@ -87,6 +43,33 @@ public class EditStrategy extends SetStrategy {
 		editor.setVisible(true);
 	}
 	
-	
+	//적용 버튼을 눌렀을때의 반응
+	protected void okPerformed() {
+		boolean eleven = true;
+		
+		for(int i = 0; i < 11; i++){
+			if(tTeam.player[i].name == null){
+				eleven = false;
+			}
+		}
+		
+		if(eleven){
+			tTeam.getData(team);
+			if(team.player[0].goalX == 720) 
+				new setDLocation().setHomeFomation(team);
+			else 
+				new setDLocation().setAwayFomation(team);
+			teaminfo.draw();
+			if(oosm != null){
+				try {
+					oosm.writeObject(tTeam);
+					oosm.flush();
+					oosm.reset();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	}	
 	
 }
