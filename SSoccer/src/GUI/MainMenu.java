@@ -17,6 +17,8 @@ public class MainMenu extends JFrame {
 	private SelectMatch sm;
 	private SetStrategy ss;
 	private Training tr;
+	private Release rl;
+	private Friend fr;
 	
 	public MainMenu(Team team){
 		setBounds(300,300,550, 435);
@@ -28,6 +30,8 @@ public class MainMenu extends JFrame {
 		sm = new SelectMatch(img);
 		ss = new SetStrategy(team);
 		tr = new Training(team);
+		rl = new Release(team);
+		fr = new Friend();
 		
 		makeTab();
 		
@@ -39,10 +43,10 @@ public class MainMenu extends JFrame {
 		tp.add("경기 선택", sm);
 		tp.add("전술 선택", ss);
 		tp.add("선수 훈련", tr);
-		tp.add("신규 영입", new JPanel());
-		tp.add("이적 시장", new JPanel());
-		tp.add("이적 등록", new JPanel());
-		tp.add("친구 목록", new JPanel());
+		tp.add("신규 영입", new Trading());
+		tp.add("이적 시장", new Trading());
+		tp.add("이적 등록", rl);
+		tp.add("친구 목록", fr);
 		add(tp);
 	}
 	
