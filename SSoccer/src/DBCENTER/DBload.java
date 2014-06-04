@@ -206,7 +206,16 @@ public class DBload {
 					
 					String temp = rs.getString(2);
 					
-					f.addFriend(temp);
+					String sql2 = "SELECT UUNAME FROM UUSER WHERE = ?";
+					
+					PreparedStatement psmt2 = conn.prepareStatement(sql2);
+					
+					psmt2.setString(1,temp);
+					
+					ResultSet rs2 = null;
+					rs2 = psmt2.executeQuery();
+					
+					f.addFriend(temp,rs2.getString(2));
 					
 				}
 				
