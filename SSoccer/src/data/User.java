@@ -11,5 +11,26 @@ public class User {
 	public int score;
 	public int point;
 	
+	public User(){
+		
+	}
+	
+	public User(String id, String nick, int m, int w, int l, int d, int s, int p ){
+		
+		this.ID=id;
+		this.nickName=nick;
+		this.money=m;
+		this.win=w;
+		this.lose=l;
+		this.draw=d;
+		this.score=s;
+		this.point=p;
+		
+	}
+	
+	public String getUser(){
+		return this.ID;
+	}
+	
 	
 }

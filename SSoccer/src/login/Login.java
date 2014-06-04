@@ -2,6 +2,7 @@ package login;
 
 import login.Join;
 import DBCENTER.*;
+import GUI.MainMenu;
 
 @SuppressWarnings("serial")
 public class Login extends javax.swing.JFrame {
@@ -153,7 +154,7 @@ public class Login extends javax.swing.JFrame {
      private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
     	 
     	    //DB이용
-    		DBdata db = new DBdata();
+    		DBLogin db = new DBLogin();
     		
     		//메뉴선택창으로 넘어가기 위한것 - 우선 메뉴없으니 매치로 실험한다.
     	 
@@ -167,7 +168,8 @@ public class Login extends javax.swing.JFrame {
     	 
     	 if(checkNumber == 0){
  
-    
+    		//로그인성공시 메인메뉴로 넘어감
+    		MainMenu m = new MainMenu(uid);
     		this.setVisible(false);//현재 로그인창 닫음   	    
     		 
     	 }

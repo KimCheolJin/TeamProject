@@ -1,25 +1,39 @@
 package data;
 
-import DBCENTER.DBdata;
+import DBCENTER.DBload;
 import store.Store;
+import friend.Friend;
 
 //로그인시 DB에서 불러오는 것들 실행시켜주는곳
 public class Load {
 	
 	//DB이용
-	DBdata db = new DBdata();
+	DBload dbl = new DBload();
 	//가지고있는변수들
+	User u;
 	Store st;
+	Team ut;
+	Player[] up;
+	Friend f;
 	
-	public Load(){
+	
+	public Load(String id){
 		
-		st = db.loadStore();
+		st = dbl.loadStore();
+		u = dbl.loadUser(id);
+		up = dbl.loadPlayer(id);
+		ut = dbl.loadTeam(id);
+		ut.setPlayer(up);
 		
 		
 	}
 	
 	public Store getStore(){
 		return this.st;
+	}
+	
+	public Team getTeam(){
+		return this.ut;
 	}
 
 }

@@ -7,7 +7,7 @@ public class Join extends javax.swing.JFrame {
 
 	
     //DBÀÌ¿ë
-    DBdata db = new DBdata();
+    DBLogin db = new DBLogin();
     
     public Join() {
         initComponents();

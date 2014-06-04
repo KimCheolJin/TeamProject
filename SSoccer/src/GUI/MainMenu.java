@@ -27,10 +27,10 @@ public class MainMenu extends JFrame {
 	private StoreUp  su;
 	private FriendGUI fg;
 	
-	public MainMenu(Team team){
+	public MainMenu(String id){
 		
 		//시작시 로드 한번 일어남
-		//data = new Load();
+		data = new Load(id);
 		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
@@ -39,8 +39,8 @@ public class MainMenu extends JFrame {
 		
 		Image img = new ImageIcon("res/menu/Background.png").getImage();
 		sm = new SelectMatch(img);
-		ss = new SetStrategy(team);
-		tr = new Training(team);
+		ss = new SetStrategy(data.getTeam());
+		tr = new Training(data.getTeam());
 		
 		sn = new StoreNew(data);
 		so = new StoreOld(data);
@@ -67,7 +67,7 @@ public class MainMenu extends JFrame {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new MainMenu(makeTeam("팀이름"));
+		//new MainMenu(makeTeam("팀이름"));
 	}
 
 	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
