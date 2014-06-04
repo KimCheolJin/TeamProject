@@ -11,16 +11,27 @@ import match.data.MTeam;
 import data.Player;
 import data.Team;
 
+import data.Load;
+
 public class MainMenu extends JFrame {
+	
+	private Load data;
 
 	private Image img;
 	private SelectMatch sm;
 	private SetStrategy ss;
 	private Training tr;
-	private Release rl;
-	private Friend fr;
+	
+	private StoreNew sn;
+	private StoreOld so;
+	private StoreUp  su;
+	private FriendGUI fg;
 	
 	public MainMenu(Team team){
+		
+		//시작시 로드 한번 일어남
+		//data = new Load();
+		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,23 +41,27 @@ public class MainMenu extends JFrame {
 		sm = new SelectMatch(img);
 		ss = new SetStrategy(team);
 		tr = new Training(team);
-		rl = new Release(team);
-		fr = new Friend();
+		
+		sn = new StoreNew(data);
+		so = new StoreOld(data);
+		su = new StoreUp(data);
+		fg = new FriendGUI(data);
 		
 		makeTab();
 		
 		setVisible(true);
 	}
 	
+	
 	private void makeTab(){
 		JTabbedPane tp = new JTabbedPane();
 		tp.add("경기 선택", sm);
 		tp.add("전술 선택", ss);
 		tp.add("선수 훈련", tr);
-		tp.add("신규 영입", new Trading());
-		tp.add("이적 시장", new Trading());
-		tp.add("이적 등록", rl);
-		tp.add("친구 목록", fr);
+		tp.add("신규 영입", sn);
+		tp.add("이적 시장", so);
+		tp.add("이적 등록", su);
+		tp.add("친구 목록", fg);
 		add(tp);
 	}
 	

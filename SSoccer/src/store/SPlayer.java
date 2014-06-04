@@ -6,9 +6,9 @@ public class SPlayer extends Player {
 
 	int price;
 
-	public SPlayer(String n, int s, int d, int p, int st, int tk, int sl,
-			int sp, int gk, int exp, int pN, int price) {
-		super(n, s, d, p, st, tk, sl, sp, gk, exp, pN);
+	public SPlayer( int pN, String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp, int price) {
+		super(pN, n, s, d, p, st, tk, sl, sp, gk, exp);
 		this.price = price;
 	}
 

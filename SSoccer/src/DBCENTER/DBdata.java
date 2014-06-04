@@ -45,7 +45,7 @@ public class DBdata {
 		DBconn.close();
 	}
 
-	// 회원가입시 중복된 ID 검색
+	// 회원가입시 중복된 ID DB에서 검색
 	public int serchSameID(String s) {
 
 		Connection conn = DBconn.getConnection();
@@ -84,7 +84,7 @@ public class DBdata {
 		return k;
 	}
 
-	// 로그인시 ID,PW 검색해줌
+	// 로그인시 DB에서 ID,PW 검색해줌
 	public int checkInfo(String uid, String upw) {
 
 		Connection conn = DBconn.getConnection();
@@ -133,7 +133,7 @@ public class DBdata {
 		return 4;
 	}
 
-	//
+	//DB로부터 Store정보 로드
 	public Store loadStore() {
 
 		Store st = new Store();
@@ -158,6 +158,7 @@ public class DBdata {
 				while (rs.next()) {
 
 					System.out.println("로드1실행");
+					int pirmaryNum = rs.getInt(1);
 					String pname = rs.getString(2);
 					int shoot = rs.getInt(3);
 					int dribble = rs.getInt(4);
@@ -169,11 +170,10 @@ public class DBdata {
 					int gk = rs.getInt(10);
 					int price = rs.getInt(11);
 					int exp = rs.getInt(12);
-					// 고유키도 받아주세요.
-					// int pirmaryNum =
 
-					st.addnewPlayer(pname, shoot, dribble, pass, stamina,
-							tackle, steal, speed, gk, exp, pirmaryNum, price);
+
+					st.addnewPlayer(pirmaryNum, pname, shoot, dribble, pass, stamina,
+							tackle, steal, speed, gk, exp, price);
 
 				}
 
@@ -187,6 +187,7 @@ public class DBdata {
 				while (rs2.next()) {
 
 					System.out.println("로드2실행");
+					int pirmaryNum = rs2.getInt(1);
 					String pname = rs2.getString(2);
 					int shoot = rs2.getInt(3);
 					int dribble = rs2.getInt(4);
@@ -198,11 +199,10 @@ public class DBdata {
 					int gk = rs2.getInt(10);
 					int price = rs2.getInt(11);
 					int exp = rs2.getInt(12);
-					// 고유키도 받아주세요.
-					// int pirmaryNum =
+					
 
-					st.addoldPlayer(pname, shoot, dribble, pass, stamina,
-							tackle, steal, speed, gk, exp, pirmaryNum, price);
+					st.addoldPlayer(pirmaryNum, pname, shoot, dribble, pass, stamina,
+							tackle, steal, speed, gk, exp, price);
 
 				}
 			} catch (Exception e) {
@@ -213,7 +213,7 @@ public class DBdata {
 
 		DBconn.close();
 
-		return st;
+		return st; //Store반환하면서 db종료
 	}
 
 }

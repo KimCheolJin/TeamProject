@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
 	
+	public int primaryNum;
 	public String name;
 	public int shoot;
 	public int dribble;
@@ -14,7 +15,6 @@ public class Player implements Serializable {
 	public int steal;
 	public int gk;
 	public int exp;
-	public int primaryNum;
 
 	public Player(String name) {
 		this.name = name;
@@ -23,8 +23,10 @@ public class Player implements Serializable {
 	public Player() {
 	}
 
-	public Player(String n, int s, int d, int p, int st, int tk, int sl,
-			int sp, int gk, int exp, int primaryNum) {
+	public Player(int primaryNum, String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp) {
+		
+		this.primaryNum = primaryNum;
 		this.name = n;
 		this.shoot = s;
 		this.dribble = d;
@@ -35,7 +37,7 @@ public class Player implements Serializable {
 		this.speed = sp;
 		this.gk = gk;
 		this.exp = exp;
-		this.primaryNum = primaryNum;
+		
 	}
 
 	public void setNull() {

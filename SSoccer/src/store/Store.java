@@ -1,6 +1,6 @@
 package store;
 
-import java.util.ArrayList;
+import java.util.ArrayList; //arrayList이용
 
 public class Store {
 
@@ -20,22 +20,22 @@ public class Store {
 	}
 	
 	
-	//신규선수 목록에 선수 추가
-	public void addnewPlayer(String n, int s, int d, int p, int st, int tk, int sl,
-			int sp, int gk, int exp, int pN, int price){
+	//신규선수 목록에 선수 추가 + String목록에도 추가
+	public void addnewPlayer(int pN, String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp, int price){
 		
-		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,exp,pN,price);
+		SPlayer temp = new SPlayer(pN, n,s,d,p,st,tk,sl,sp,gk,exp,price);
 		newPlayer.add(temp);
 		np.add(temp.toString());
 		
 		
 	}
 	
-	//기존선수 목록에 선수 추가
-	public void addoldPlayer(String n, int s, int d, int p, int st, int tk, int sl,
-			int sp, int gk, int exp, int pN, int price){
+	//기존선수 목록에 선수 추가 + String목록에도 추가
+	public void addoldPlayer(int pN, String n, int s, int d, int p, int st, int tk, int sl,
+			int sp, int gk, int exp,  int price){
 		
-		SPlayer temp = new SPlayer(n,s,d,p,st,tk,sl,sp,gk,exp,pN,price);
+		SPlayer temp = new SPlayer(pN, n,s,d,p,st,tk,sl,sp,gk,exp,price);
 		oldPlayer.add(temp);
 		op.add(temp.toString());
 	}
@@ -54,17 +54,17 @@ public class Store {
 		
 	}
     
-    //신규선수 Stirng[] getter
+    //신규선수 String[] getter
     public String[] getnp(){
     	
-    	String[] temp= this.np.toArray(new String[np.size()]);
+    	String[] temp= this.np.toArray(new String[np.size()]); //arrayList -> String[]	
     	return temp;
     }
 
-    //기존사용자가 사용하던 선수 Stirng[] getter
+    //기존사용자가 사용하던 선수 String[] getter
     public String[] getop(){
     	
-    	String[] temp= this.op.toArray(new String[op.size()]);
+    	String[] temp= this.op.toArray(new String[op.size()]); //arrayList -> String[]	
     	return temp;
     }
 }
