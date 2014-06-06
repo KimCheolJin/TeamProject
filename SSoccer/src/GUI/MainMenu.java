@@ -53,6 +53,7 @@ public class MainMenu extends JFrame {
 	}
 	
 	
+	
 	private void makeTab(){
 		JTabbedPane tp = new JTabbedPane();
 		tp.add("경기 선택", sm);
@@ -67,6 +68,7 @@ public class MainMenu extends JFrame {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		new MainMenu("abc");
 		//new MainMenu(makeTeam("팀이름"));
 	}
 

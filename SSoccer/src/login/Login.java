@@ -7,6 +7,8 @@ import GUI.MainMenu;
 @SuppressWarnings("serial")
 public class Login extends javax.swing.JFrame {
 	
+	MainMenu m;
+	
     public Login() {
         initComponents();
         this.setLocation(300,300);
@@ -169,7 +171,7 @@ public class Login extends javax.swing.JFrame {
     	 if(checkNumber == 0){
  
     		//로그인성공시 메인메뉴로 넘어감
-    		MainMenu m = new MainMenu(uid);
+    		m = new MainMenu(uid); //현재 에러발생부분
     		this.setVisible(false);//현재 로그인창 닫음   	    
     		 
     	 }

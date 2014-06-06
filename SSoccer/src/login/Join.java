@@ -127,7 +127,8 @@ public class Join extends javax.swing.JFrame {
 
         jLabel9.setText("-");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "맨시티", "리버풀", "첼시", "아스널", "에버튼", "토트넘", "맨유", "사우샘프턴", "스토크시티", "뉴캐슬", "크리스탈 팰리스", "스완지", "웨스트햄", "선덜랜드", "아스톤 빌라", "헐시티", "웨스트 브롬", "노리치", "풀럼", "카디프", " " }));
+        //우선 5팀만 정함 마지막에 더 추가
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "아스널", "맨시티", "리버풀", "맨유", "첼시"}));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -271,10 +272,14 @@ public class Join extends javax.swing.JFrame {
         phonenumber = jTextField4.getText()+jTextField5.getText()+jTextField6.getText();
         team = jComboBox1.getSelectedItem().toString();
         
+        
         //비밀번호2개가 일치해야지 DB로 전송함
         if(pw.equals(jpw)){
+        	
         	//전송부분
         	db.putJoin(id, pw, nickname, email, phonenumber);
+        	db.putUserPlayer(team, id);
+        	db.putUserTeam(team, id);
         	
         	//전송후 새창
         	this.setVisible(false);

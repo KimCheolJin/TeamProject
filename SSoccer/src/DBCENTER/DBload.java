@@ -54,6 +54,8 @@ public class DBload {
 					u = new User(uid,nick,money,win,draw,lose,score,point);
 					
 				}
+				
+				psmt.close();
 			}
 			catch(Exception e){
 				System.out.println(e.toString());
@@ -81,18 +83,17 @@ public class DBload {
 			try {
 				
 				//테이블중에서 해당 유저의 선수 테이블을 찾음
-				String sql = "SELECT * FROM ?_PLAYER";
+				String sql = "SELECT * FROM "+id+"_PLAYER"; //에러발생
 					
 				PreparedStatement psmt = conn.prepareStatement(sql);
-				
-				psmt.setString(1, id);
 
 				ResultSet rs = null;
 				rs = psmt.executeQuery();
 				
+				int i=0;
 				while(rs.next()){
 					
-					int i = 0;
+					
 					System.out.println("유저선수로드중---"+i);
 					
 					int primaryNum = rs.getInt(1);
@@ -113,6 +114,8 @@ public class DBload {
 					i++;
 					
 				}
+				
+				psmt.close();
 			}
 			catch(Exception e){
 				System.out.println(e.toString());
@@ -166,6 +169,9 @@ public class DBload {
 					t = new Team(name,strategyA, strategyD,strategyT, strategyF,colorR,colorG,colorB );
 					
 				}
+				
+				psmt.close();
+				
 			}
 			catch(Exception e){
 				System.out.println(e.toString());
@@ -215,9 +221,14 @@ public class DBload {
 					ResultSet rs2 = null;
 					rs2 = psmt2.executeQuery();
 					
+					//id에 맞는 nick가져와서 id,nick을 친구목록에저장
 					f.addFriend(temp,rs2.getString(2));
 					
+					psmt2.close();
+					
 				}
+				
+				psmt.close();
 				
 			}
 			catch(Exception e){
@@ -253,9 +264,9 @@ public class DBload {
 					ResultSet rs = null;
 					rs = psmt.executeQuery();
 
+					int i=0; //잘진행되나 확인하려고 사용
 					while (rs.next()) {
 
-						int i=0;
 						System.out.println("로드1실행중---"+i);
 						int primaryNum = rs.getInt(1);
 						String pname = rs.getString(2);
@@ -277,6 +288,8 @@ public class DBload {
 
 					}
 					
+					psmt.close();
+					
 					System.out.println("로드1실행완료!!");
 
 					String sql2 = "SELECT * FROM MARKET_PLAYER";
@@ -286,9 +299,9 @@ public class DBload {
 					ResultSet rs2 = null;
 					rs2 = psmt2.executeQuery();
 
+					i=0;
 					while (rs2.next()) {
 						
-						int i=0;
 						System.out.println("로드2실행중---"+i);
 						int primaryNum = rs2.getInt(1);
 						String pname = rs2.getString(2);
@@ -310,6 +323,8 @@ public class DBload {
 						i++;
 
 					}
+					
+					psmt2.close();
 					
 					System.out.println("로드2실행완료!!");
 				} catch (Exception e) {
