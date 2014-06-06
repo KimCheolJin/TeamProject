@@ -36,4 +36,12 @@ public class Load {
 		return this.ut;
 	}
 
+	public User getUser() {
+		return u;
+	}
+	
+	public Friend getFriend(){
+		return f;
+	}
+
 }

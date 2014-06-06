@@ -12,7 +12,8 @@ public class MTeam extends Team {
 	public int score = 0;
 	
 	public MTeam(Team t) {
-		super(t.name);
+		super();
+		name = t.name;
 		setPosition(t);
 		colorR = t.colorR;
 		colorG = t.colorG;

@@ -63,7 +63,8 @@ public class Client  {
 	
 	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
 	public static Team makeTeam(String tName){
-		Team team = new Team(tName);
+		Team team = new Team();
+		team.name = tName;
 		for(int i = 0; i < 22; i++){
 			String pname = team.name + " " + i + "번";
 			team.player[i] = new Player(pname);

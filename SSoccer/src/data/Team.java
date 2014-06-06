@@ -18,11 +18,6 @@ public class Team implements Serializable {
 	
 	
 	public Team(){
-		
-	}
-	
-	public Team(String name) {
-		this.name = name;
 		for(int i = 0; i < 22; i++){
 			player[i] = new Player("");
 			player[i].setNull();
@@ -30,8 +25,8 @@ public class Team implements Serializable {
 	}
 	
     public Team( String name, int sA, int sD, int sT, int sF, int cR, int cG, int cB){
-	
-		this.name=name;
+    	this();
+    	this.name=name;
 		this.strategyA=sA;
 		this.strategyD=sD;
 		this.strategyT=sT;

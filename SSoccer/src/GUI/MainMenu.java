@@ -15,17 +15,18 @@ import data.Load;
 
 public class MainMenu extends JFrame {
 	
-	private Load data;
+	protected Load data;
 
-	private Image img;
-	private SelectMatch sm;
+	protected Image img;
+	protected SelectMatch sm;
+	protected JTabbedPane tp;
 	private SetStrategy ss;
 	private Training tr;
 	
 	private StoreNew sn;
 	private StoreOld so;
 	private StoreUp  su;
-	private FriendGUI fg;
+	protected FriendGUI fg;
 	
 	public MainMenu(String id){
 		
@@ -38,14 +39,13 @@ public class MainMenu extends JFrame {
 		setResizable(false);
 		
 		Image img = new ImageIcon("res/menu/Background.png").getImage();
-		sm = new SelectMatch(img);
+		sm = new SelectMatch(img, data, this);
 		ss = new SetStrategy(data.getTeam());
 		tr = new Training(data.getTeam());
 		
 		sn = new StoreNew(data);
 		so = new StoreOld(data);
 		su = new StoreUp(data);
-		fg = new FriendGUI(data);
 		
 		makeTab();
 		
@@ -55,14 +55,13 @@ public class MainMenu extends JFrame {
 	
 	
 	private void makeTab(){
-		JTabbedPane tp = new JTabbedPane();
+		tp = new JTabbedPane();
 		tp.add("경기 선택", sm);
 		tp.add("전술 선택", ss);
 		tp.add("선수 훈련", tr);
 		tp.add("신규 영입", sn);
 		tp.add("이적 시장", so);
 		tp.add("이적 등록", su);
-		tp.add("친구 목록", fg);
 		add(tp);
 	}
 	
@@ -74,7 +73,8 @@ public class MainMenu extends JFrame {
 
 	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
 	public static Team makeTeam(String tName){
-		Team team = new Team(tName);
+		Team team = new Team();
+		team.name = tName;
 		for(int i = 0; i < 22; i++){
 			String pname = team.name + " " + i + "번";
 			team.player[i] = new Player(pname);

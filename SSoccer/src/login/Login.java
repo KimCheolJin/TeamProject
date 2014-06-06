@@ -1,5 +1,6 @@
 package login;
 
+import client.ClientK;
 import login.Join;
 import DBCENTER.*;
 import GUI.MainMenu;
@@ -7,7 +8,7 @@ import GUI.MainMenu;
 @SuppressWarnings("serial")
 public class Login extends javax.swing.JFrame {
 	
-	MainMenu m;
+	ClientK m;
 	
     public Login() {
         initComponents();
@@ -171,7 +172,7 @@ public class Login extends javax.swing.JFrame {
     	 if(checkNumber == 0){
  
     		//로그인성공시 메인메뉴로 넘어감
-    		m = new MainMenu(uid); //현재 에러발생부분
+    		m = new ClientK(uid); //현재 에러발생부분
     		this.setVisible(false);//현재 로그인창 닫음   	    
     		 
     	 }
