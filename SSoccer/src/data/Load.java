@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 import DBCENTER.DBload;
 import store.Store;
 import friend.Friend;

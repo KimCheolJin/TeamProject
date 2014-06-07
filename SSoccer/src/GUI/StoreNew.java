@@ -1,13 +1,19 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.*;
 
+import login.Massage;
 import data.Load;
 
 //신규영입 부분
 public class StoreNew extends JPanel {
+	
+	int selectedIndex ; //선택된 list의 index 저장하는 변수
+	int length;
 	
 	JList<String> list;
 	
@@ -25,6 +31,8 @@ public class StoreNew extends JPanel {
 	JLabel s7;
 	JLabel s8;
 	
+	//테스트
+	JLabel test;
 	
 	JButton getit;
 	JButton search;
@@ -44,17 +52,29 @@ public class StoreNew extends JPanel {
 		this.setSize(540,380);
 		this.setLayout(null);
 		
-		//실험용
-		String[] ss={"1","2","3","4","5","6","7","8","9","10"};
+		//설정
+		String[] ss=data.getStore().getnp(); 
+		length = data.getStore().getnp().length;
 		
 		//선수목록부분
 		list = new JList<String>(ss);
-		//list.setBounds(10, 10, 520, 150);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp = new JScrollPane(list);
-		//ss 대신 data.getStore().getnp(); 
 		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		sp.setBounds(10, 10, 520, 200);
 		add(sp);
+		
+		this.selectedIndex = length+1; //초기값 설정
+		
+		//Jlist 이벤트핸들러부분
+		list.addListSelectionListener(new ListSelectionListener(){
+
+			public void valueChanged(ListSelectionEvent e) {
+				
+			    selectedIndex = list.getSelectedIndex();
+				
+			}
+		});
 		
 		//소지금부분
 		hasMoney = new JLabel("소지금  :");
@@ -71,10 +91,33 @@ public class StoreNew extends JPanel {
 		mark.setBounds(160, 220, 20, 30);
 		add(mark);
 		
-		//영입버튼
+		//test 
+		test = new JLabel("테스트");
+		test.setBounds(250,220,100,30);
+		add(test);
+		
+		//영입버튼 + 버튼이벤트
 		getit = new JButton("영입");
 		getit.setBounds(460, 220, 70, 30);
 		add(getit);
+		
+		getit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(selectedIndex>=0 && selectedIndex<=length){
+					
+					//DB작업 일어남
+					
+					
+				}
+				else{
+					
+					//오류메세지 발생
+					
+				}
+			}
+			
+		});
+		
 		
 		//능력치검색부분
 		search = new JButton("능력치 검색");
@@ -152,7 +195,6 @@ public class StoreNew extends JPanel {
 		gk = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
 		gk.setBounds(460, 320, 70, 25);
 		add(gk);
-		
 		
 		
 		

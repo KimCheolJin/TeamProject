@@ -1,6 +1,7 @@
 package store;
 
 import java.util.ArrayList; //arrayListÀÌ¿ë
+import data.Team;
 
 public class Store {
 
@@ -16,6 +17,10 @@ public class Store {
 	
 	
 	public Store(){
+		
+	}
+	
+	public void buyNewPlayer(int index, Team team){
 		
 	}
 	

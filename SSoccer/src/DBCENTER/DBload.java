@@ -91,6 +91,7 @@ public class DBload {
 				rs = psmt.executeQuery();
 				
 				int i=0;
+				
 				while(rs.next()){
 					
 					
@@ -132,7 +133,7 @@ public class DBload {
 	//DB로 부터 USER_TEAM정보 로드
 	public Team loadTeam(String id){
 		
-		Team t = new Team();
+		Team t = null;
 		
 		Connection conn = DBconn.getConnection();
 
@@ -170,6 +171,7 @@ public class DBload {
 					
 				}
 				
+				System.out.println("유저팀정보로드완료!!");
 				psmt.close();
 				
 			}
@@ -177,7 +179,7 @@ public class DBload {
 				System.out.println(e.toString());
 			}
 		}
-		System.out.println("유저팀정보로드완료!!");
+
 		
 		DBconn.close();
 		

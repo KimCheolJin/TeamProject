@@ -67,7 +67,7 @@ public class MainMenu extends JFrame {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new MainMenu("abc");
+		new MainMenu("TEAM");
 		//new MainMenu(makeTeam("∆¿¿Ã∏ß"));
 	}
 

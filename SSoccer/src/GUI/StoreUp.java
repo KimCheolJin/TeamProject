@@ -35,14 +35,13 @@ public class StoreUp extends JPanel {
 		this.setSize(540,380);
 		this.setLayout(null);
 		
-		//실험용
-		String[] ss={"1","2","3","4","5","6","7","8","9","10"};
+		//설정 사용자의 선수목록 보여줌
+		String[] ss= data.getTeam().printPlayer();
 		
 		//선수목록부분
 		list = new JList<String>(ss);
 		//list.setBounds(10, 10, 520, 150);
 		sp = new JScrollPane(list);
-		//ss 대신 data의 사용자 선수들을 입력 
 		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		sp.setBounds(10, 10, 520, 200);
 		add(sp);

@@ -1,14 +1,21 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import data.Load;
 
 public class StoreOld extends JPanel {
 	
 
+	int selectedIndex ; //선택된 list의 index 저장하는 변수
+	int length;
+	
     JList<String> list;
 	
 	JScrollPane sp;
@@ -45,17 +52,30 @@ public class StoreOld extends JPanel {
 		this.setSize(540,380);
 		this.setLayout(null);
 		
-		//실험용
-		String[] ss={"1","2","3","4","5","6","7","8","9","10"};
+		//설정
+		String[] ss= data.getStore().getop(); 
+		length = data.getStore().getop().length;
 		
 		//선수목록부분
 		list = new JList<String>(ss);
-		//list.setBounds(10, 10, 520, 150);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp = new JScrollPane(list);
-		//ss 대신 data.getStore().getop(); 
 		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		sp.setBounds(10, 10, 520, 200);
 		add(sp);
+		
+        this.selectedIndex = length+1; //초기값 설정
+		
+		//Jlist 이벤트핸들러부분
+		list.addListSelectionListener(new ListSelectionListener(){
+
+			public void valueChanged(ListSelectionEvent e) {
+				
+			    selectedIndex = list.getSelectedIndex();
+				
+			}
+		});
+		
 		
 		//소지금부분
 		hasMoney = new JLabel("소지금  :");
@@ -77,6 +97,23 @@ public class StoreOld extends JPanel {
 		getit = new JButton("영입");
 		getit.setBounds(460, 220, 70, 30);
 		add(getit);
+		
+		getit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(selectedIndex>=0 && selectedIndex<=length){
+					
+					//DB작업 일어남
+					
+					
+				}
+				else{
+					
+					//오류메세지 발생
+					
+				}
+			}
+			
+		});
 		
 		//능력치검색부분
 		search = new JButton("능력치 검색");

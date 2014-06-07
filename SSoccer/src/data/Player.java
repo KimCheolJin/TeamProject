@@ -41,7 +41,7 @@ public class Player implements Serializable {
 	}
 
 	public void setNull() {
-		name = null;
+		name = "";//공백칸으로 둔다
 		shoot = 0;
 		dribble = 0;
 		pass = 0;
@@ -67,6 +67,15 @@ public class Player implements Serializable {
 		gk = p.gk;	
 		exp = p.exp;
 		primaryNum = p.primaryNum;
+	}
+	
+	public String toString() {
+
+		//살짝 수정 모습좋게 보이기 위함 JLIST 에서 수정전에도 수평막대생김
+		return "[" + name + "]==" + "[슛] " + shoot + " [드리블] " + dribble + " [패스] "
+				+ pass + " [스테미너] " + stamina + " [태클] " + tackle + " [스틸] " + steal
+				+ " [스피드] " + speed + " [GK능력치] " + gk +  " [경험치] "
+				+ exp;
 	}
 	
 	
