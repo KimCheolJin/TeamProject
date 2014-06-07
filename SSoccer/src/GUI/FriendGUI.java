@@ -29,7 +29,6 @@ public class FriendGUI extends JPanel implements Runnable {
 	JScrollPane onAirS;
 	JScrollPane onMatchS;
 
-	JLabel j1;
 	JLabel j2;
 	JLabel j3;
 
@@ -55,35 +54,40 @@ public class FriendGUI extends JPanel implements Runnable {
 		
 		this.bw = bw;
 		this.br = br;
-
 		new Thread(this).start();
 	}
 
 	private void setList() {
 		// 친구목록부분
-		j1 = new JLabel("친구목록");
-		j1.setBounds(80, 10, 100, 30);
-		add(j1);
 
 		// data에서 유저의 친구목록 받아오면 보여줌
 		// 접속한 친구 목록
 		onAirList = new JList<String>();
 		onAirS = new JScrollPane(onAirList);
 		onAirS.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		onAirS.setBounds(10, 50, 200, 90);
+		onAirS.setBounds(10, 30, 200, 100);
 		add(onAirS);
+		JLabel onAirLabel = new JLabel("접속 중");
+		onAirLabel.setBounds(85, 10, 60, 20);
+		add(onAirLabel);
 		// 시합중인 친구 목록
 		onMatchList = new JList<String>();
 		onMatchS = new JScrollPane(onMatchList);
 		onMatchS.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		onMatchS.setBounds(10, 155, 200, 90);
+		onMatchS.setBounds(10, 150, 200, 100);
 		add(onMatchS);
+		JLabel onMatchLabel = new JLabel("시합 중");
+		onMatchLabel.setBounds(85, 130, 60, 20);
+		add(onMatchLabel);
 		// 비접속인 친구 목록
 		offAirList = new JList<String>();
 		offAirS = new JScrollPane(offAirList);
 		offAirS.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		offAirS.setBounds(10, 260, 200, 90);
+		offAirS.setBounds(10, 270, 200, 100);
 		add(offAirS);
+		JLabel offAirLabel = new JLabel("비 접속");
+		offAirLabel.setBounds(85, 250, 60, 20);
+		add(offAirLabel);
 	}
 	
 	private void setOther() {
@@ -113,27 +117,28 @@ public class FriendGUI extends JPanel implements Runnable {
 
 				// 버튼 부분
 				game = new JButton("게임하기");
-				game.setBounds(270, 335, 100, 20);
+				game.setBounds(230, 335, 140, 35);
 				add(game);
-
+				
 				trade = new JButton("거래하기");
-				trade.setBounds(380, 335, 100, 20);
+				trade.setBounds(390, 335, 140, 35);
 				add(trade);
 	}
 	
 	public void run() {
-		String[] temp;
 		ArrayList<String> offAir;
 		ArrayList<String> onAir;
 		ArrayList<String> onMatch;
 		while(true){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 				offAir = new ArrayList<String>();
 				onAir = new ArrayList<String>();
 				onMatch = new ArrayList<String>();
 				for(int i = 0; i < data.getFriend().getFriendList().size(); i++){
 					bw.write(data.getFriend().getFriendList().get(i));
+					bw.newLine();
+					bw.flush();
 					data.getFriend().getAcceptList().set(i, br.read());
 					if(data.getFriend().getAcceptList().get(i) == 0)
 						offAir.add(data.getFriend().getFriendNickList().get(i));
@@ -142,12 +147,9 @@ public class FriendGUI extends JPanel implements Runnable {
 					else if(data.getFriend().getAcceptList().get(i) == 2)
 						onMatch.add(data.getFriend().getFriendNickList().get(i));
 				}
-				temp = offAir.toArray(new String[offAir.size()]);
-				offAirList.setListData(temp);
-				temp = onAir.toArray(new String[onAir.size()]);
-				onAirList.setListData(temp);
-				temp = onMatch.toArray(new String[onMatch.size()]);
-				onMatchList.setListData(temp);
+				offAirList.setListData(offAir.toArray(new String[offAir.size()]));
+				onAirList.setListData(onAir.toArray(new String[onAir.size()]));
+				onMatchList.setListData(onMatch.toArray(new String[onMatch.size()]));
 			} catch (InterruptedException | IOException e) {
 				e.printStackTrace();
 			}

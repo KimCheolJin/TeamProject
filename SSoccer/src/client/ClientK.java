@@ -39,12 +39,11 @@ public class ClientK extends MainMenu implements Runnable {
 			so = new Socket(IP, port);
 			bw = new BufferedWriter(new OutputStreamWriter(so.getOutputStream()));
 			br = new BufferedReader(new InputStreamReader(so.getInputStream()));
-
 			bw.write(data.getUser().ID);
 			bw.newLine();
 			bw.flush();
 		} catch (IOException e) {
-			
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -65,7 +64,7 @@ public class ClientK extends MainMenu implements Runnable {
 	}
 	
 	public static void main(String args[]){
-		String id = "";
+		String id = "qwe";
 		new ClientK(id);
 	}
 
