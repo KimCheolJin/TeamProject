@@ -1,6 +1,8 @@
 package store;
 
 import java.util.ArrayList; //arrayList이용
+
+import data.Player;
 import data.Team;
 
 public class Store {
@@ -20,7 +22,24 @@ public class Store {
 		
 	}
 	
-	public void buyNewPlayer(int index, Team team){
+	public SPlayer buyNewPlayer(int index, Team team){
+		
+		SPlayer temp = newPlayer.get(index);
+		team.addPlayer(temp);
+		return temp;
+		
+	}
+	
+    public SPlayer buyOldPlayer(int index, Team team){
+		
+    	SPlayer temp = oldPlayer.get(index);
+		team.addPlayer(temp);
+		
+		//oldplayer의 경우는 상점과 목록에서 삭제
+		oldPlayer.remove(index);
+		op.remove(index);
+		
+		return temp;
 		
 	}
 	
@@ -71,5 +90,13 @@ public class Store {
     	
     	String[] temp= this.op.toArray(new String[op.size()]); //arrayList -> String[]	
     	return temp;
+    }
+    
+    public SPlayer getNewPlayerIndex(int index){
+    	return newPlayer.get(index);
+    }
+    
+    public SPlayer getOldPlayerIndex(int index){
+    	return oldPlayer.get(index);
     }
 }

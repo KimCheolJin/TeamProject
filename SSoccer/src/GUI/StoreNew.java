@@ -9,11 +9,14 @@ import javax.swing.event.*;
 import login.Massage;
 import data.Load;
 
+
 //신규영입 부분
 public class StoreNew extends JPanel {
 	
 	int selectedIndex ; //선택된 list의 index 저장하는 변수
-	int length;
+	int length; //상점에 선수들 담긴 길이
+	int numOfPlayer; //선수몇명인지 확인하는 변수
+	
 	
 	JList<String> list;
 	
@@ -31,9 +34,6 @@ public class StoreNew extends JPanel {
 	JLabel s7;
 	JLabel s8;
 	
-	//테스트
-	JLabel test;
-	
 	JButton getit;
 	JButton search;
 	
@@ -47,7 +47,8 @@ public class StoreNew extends JPanel {
 	JComboBox<String> gk;
 	
 	
-	public StoreNew(Load data){
+	public StoreNew(final Load data){
+	
 		
 		this.setSize(540,380);
 		this.setLayout(null);
@@ -82,7 +83,8 @@ public class StoreNew extends JPanel {
 		add(hasMoney);
 		
 		Money = new JLabel();
-		Money.setText("258"); //실험용금액
+		int haveMoney = data.getUser().getMoney();
+		Money.setText(Integer.toString(haveMoney)); 
 		Money.setBounds(80, 220, 70, 30);
 		Money.setHorizontalAlignment(JLabel.RIGHT);
 		add(Money);
@@ -91,27 +93,45 @@ public class StoreNew extends JPanel {
 		mark.setBounds(160, 220, 20, 30);
 		add(mark);
 		
-		//test 
-		test = new JLabel("테스트");
-		test.setBounds(250,220,100,30);
-		add(test);
 		
 		//영입버튼 + 버튼이벤트
 		getit = new JButton("영입");
 		getit.setBounds(460, 220, 70, 30);
 		add(getit);
 		
+		numOfPlayer = data.getTeam().getNumberOfPlayer();
+		
+		
 		getit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(selectedIndex>=0 && selectedIndex<=length){
 					
-					//DB작업 일어남
-					
+					if(numOfPlayer>22){
+						
+						//소유중인 선수가 22명보다 많으면 구매못하게 오류메세지발생
+						Massage ms = new Massage("더이상 선수를 영입할 수 없습니다!!");
+						
+					}
+					else{
+						//정상적인 구매 
+						
+						//금액이 부족하면 에러메세지 뜸
+						int diff = data.getUser().getMoney()-data.getStore().getNewPlayerIndex(selectedIndex).getPrice();
+						if(diff<0){
+							Massage ms = new Massage("금액이부족합니다!!");
+						}
+						else{
+							data.buyNewPlayer(selectedIndex);
+							Massage ms = new Massage("영입완료!!");
+						}
+						
+					}
 					
 				}
 				else{
 					
 					//오류메세지 발생
+					Massage ms = new Massage("선수를선택하세요!!");
 					
 				}
 			}

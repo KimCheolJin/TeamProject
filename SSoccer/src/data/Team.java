@@ -3,16 +3,17 @@ package data;
 import java.io.Serializable;
 
 import data.Player;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Team implements Serializable {
-<<<<<<< HEAD
+
 	//arraylist사용해야할듯
-	public ArrayList<Player> player2;
-	public Player player[] ;
-=======
+	public ArrayList<Player> player2 = new ArrayList<Player>();
 	public Player player[] = new Player[22];
->>>>>>> origin/master
+
 	public String name;
 	public int atkNum = 2;
 	public int midNum = 4;
@@ -44,10 +45,14 @@ public class Team implements Serializable {
 	}
     
     public void setPlayer(Player[] p){
-    	for(int i = 0; i < 21; i++){
+    	
+    	this.player=p;
+    	
+    	//이부분 에러떠서 일단 주석처리했어요
+    	/* for(int i = 0; i < 21; i++){
     		player[i] = p[i];
     	}
-    	player[21].setNull();
+    	player[21].setNull(); */ 
     }
     
     public String[]	printPlayer(){
@@ -61,23 +66,50 @@ public class Team implements Serializable {
     	return temp;
     }
     
+    //선수배열 list로 변환
+    public void arrayToList(){
+    	
+    	Collections.addAll(player2, player);
+    	
+    }
+    
+    //선수리스트 배열로 변환
+    public void listToArray(){
+    	
+    	player = player2.toArray(new Player[player2.size()]);
+    	
+    }
+    
     //팀에 선수 추가
     public void addPlayer(Player p){
     	
+    	this.arrayToList();
     	player2.add(p);
-    	
+    	this.listToArray();
     }
     
     //팀에 선수 제거
     public void removePlayer(int index){
     	
+    	this.arrayToList();
+    	
     	player2.remove(index);
     	
-    	for(int i=index; i<player2.size()-1; i++){
-    		player2.add(player2.get(i+1));
-    	}
+    	this.listToArray();
     	
+    }
+    
+    //변수대신 list 이용해서 그냥 크기 반환
+    public int getNumberOfPlayer(){
     	
+    	this.arrayToList();
+    	return this.player2.size();
+    }
+    
+    public Player getPlayer(int index){
+    	
+    	this.arrayToList();
+    	return player2.get(index);
     }
 
 }

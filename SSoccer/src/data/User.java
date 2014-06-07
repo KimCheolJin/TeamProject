@@ -28,8 +28,18 @@ public class User {
 		
 	}
 	
-	public String getUser(){
+	public String getUserID(){
 		return this.ID;
+	}
+	
+	public void changeMoney(int d){
+		
+		this.money += d;
+		
+	}
+	
+	public int getMoney(){
+		return this.money;
 	}
 	
 	

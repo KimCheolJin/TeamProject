@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import login.Massage;
 import data.Load;
 
 public class StoreOld extends JPanel {
@@ -15,6 +16,8 @@ public class StoreOld extends JPanel {
 
 	int selectedIndex ; //선택된 list의 index 저장하는 변수
 	int length;
+	int numOfPlayer;
+
 	
     JList<String> list;
 	
@@ -47,7 +50,8 @@ public class StoreOld extends JPanel {
 	JComboBox<String> gk;
 	
 	
-	public StoreOld(Load data){
+	public StoreOld(final Load data){
+		
 		
 		this.setSize(540,380);
 		this.setLayout(null);
@@ -83,7 +87,8 @@ public class StoreOld extends JPanel {
 		add(hasMoney);
 		
 		Money = new JLabel();
-		Money.setText("258"); //실험용금액
+		int haveMoney = data.getUser().getMoney();
+		Money.setText(Integer.toString(haveMoney)); 
 		Money.setBounds(80, 220, 70, 30);
 		Money.setHorizontalAlignment(JLabel.RIGHT);
 		add(Money);
@@ -98,17 +103,39 @@ public class StoreOld extends JPanel {
 		getit.setBounds(460, 220, 70, 30);
 		add(getit);
 		
+        numOfPlayer = data.getTeam().getNumberOfPlayer();
+		
 		getit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(selectedIndex>=0 && selectedIndex<=length){
 					
-					//DB작업 일어남
-					
+					if(numOfPlayer>22){
+						
+						//소유중인 선수가 22명보다 많으면 구매못하게 오류메세지발생
+						Massage ms = new Massage("더이상 선수를 영입할 수 없습니다!!");
+						
+					}
+					else{
+						//정상적인 구매 
+						
+						//금액이 부족하면 에러메세지 뜸
+						int diff = data.getUser().getMoney()-data.getStore().getOldPlayerIndex(selectedIndex).getPrice();
+						if(diff<0){
+							Massage ms = new Massage("금액이부족합니다!!");
+						}
+						else{
+							data.buyOldPlayer(selectedIndex);
+							Massage ms = new Massage("영입완료!!");
+						}
+						
+						
+					}
 					
 				}
 				else{
 					
 					//오류메세지 발생
+					Massage ms = new Massage("선수를선택하세요!!");
 					
 				}
 			}

@@ -66,7 +66,7 @@ public class MainMenu extends JFrame {
 		add(tp);
 	}
 	
-<<<<<<< HEAD
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new MainMenu("TEAM");
@@ -97,6 +97,5 @@ public class MainMenu extends JFrame {
 		return team;
 	}
 	
-=======
->>>>>>> origin/master
+
 }

@@ -14,7 +14,11 @@ public class TemporaryTeam implements Serializable {
 	public int defNum, midNum, atkNum;
 	
 	public TemporaryTeam(Team team){
-		for(int i = 0; i < 22; i++){
+		
+		//22고정시켜놓으면 에러발생함
+		//선수가 항상 22명있지 않음
+		int max = team.getNumberOfPlayer();
+		for(int i = 0; i < max; i++){
 			player[i] = new Player();
 			player[i].copy(team.player[i]);
 		}
