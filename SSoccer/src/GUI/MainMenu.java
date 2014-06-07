@@ -20,12 +20,12 @@ public class MainMenu extends JFrame {
 	protected Image img;
 	protected SelectMatch sm;
 	protected JTabbedPane tp;
-	private SetStrategy ss;
-	private Training tr;
+	protected SetStrategy ss;
+	protected Training tr;
 	
-	private StoreNew sn;
-	private StoreOld so;
-	private StoreUp  su;
+	protected StoreNew sn;
+	protected StoreOld so;
+	protected StoreUp  su;
 	public FriendGUI fg;
 	
 	public MainMenu(String id){
@@ -39,24 +39,24 @@ public class MainMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		Image img = new ImageIcon("res/menu/Background.png").getImage();
-		sm = new SelectMatch(img, data, this);
-		ss = new SetStrategy(data.getTeam());
-		tr = new Training(data.getTeam());
-		
-		sn = new StoreNew(data);
-		so = new StoreOld(data);
-		su = new StoreUp(data);
-		
+		setCompo();
 		makeTab();
 		
 		setVisible(true);
 	}
 	
-	
-	
-	private void makeTab(){
+	protected void setCompo(){		
+		Image img = new ImageIcon("res/menu/Background.png").getImage();
 		tp = new JTabbedPane();
+		sm = new SelectMatch(img, data, this);
+		ss = new SetStrategy(data.getTeam());
+		tr = new Training(data.getTeam());
+		sn = new StoreNew(data);
+		so = new StoreOld(data);
+		su = new StoreUp(data);
+	}
+	
+	protected void makeTab(){
 		tp.add("경기 선택", sm);
 		tp.add("전술 선택", ss);
 		tp.add("선수 훈련", tr);

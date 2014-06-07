@@ -26,6 +26,7 @@ public class ServerK extends JFrame implements Runnable {
 	String ID[] = new String[64];
 	
 	String matchIP;
+	int port = 1112;
 	
 	public ServerK(String title) {
 		setTitle(title);
@@ -38,7 +39,7 @@ public class ServerK extends JFrame implements Runnable {
 		setVisible(true);
 
 		try {
-			ss = new ServerSocket(1111);
+			ss = new ServerSocket(port);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,14 +88,17 @@ public class ServerK extends JFrame implements Runnable {
 				ID[i] = br[i].readLine();
 				int j;
 				while (true) {
-					String id = br[i].readLine();
-					for(j = 0; j < 64; j++){
-						if(id.equals(ID[j])) break;
+					String line = br[i].readLine();
+					if(line.equals("")){
+						matchIP = br[i].readLine();
+						accept[i] = 2;
+					} else {
+						for(j = 0; j < 64; j++){
+							if(line.equals(ID[j])) break;
+						}
+						bw[i].write(accept[j]);
+						bw[i].flush();
 					}
-					bw[i].write(accept[j]);
-					bw[i].flush();
-					//matchIP = br[i].readLine();
-					//accept[i] = 2;
 				}
 			} catch (IOException e) {
 				accept[i] = 0;
@@ -124,18 +128,18 @@ public class ServerK extends JFrame implements Runnable {
 			
 			if(player1 != -1 && player2 != -1) {
 				try {
-					bw[player1].write(matchIP);
+					bw[player1].newLine();
+					bw[player1].write("0");
 					bw[player1].newLine();
 					bw[player1].flush();
+					bw[player2].newLine();
 					bw[player2].write(matchIP);
 					bw[player2].newLine();
 					bw[player2].flush();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-
 		}
 	}
 

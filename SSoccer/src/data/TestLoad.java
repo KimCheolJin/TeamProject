@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 import store.Store;
 import friend.Friend;
 
@@ -11,7 +13,7 @@ public class TestLoad extends Load {
 		super();
 		u = makeUser(id);
 		st = makeStore();
-		ut = makeTeam("팀 이름");
+		ut = makeTeam("맨유");
 		f = makeFriend();
 	}
 
@@ -19,21 +21,25 @@ public class TestLoad extends Load {
 	public Team makeTeam(String tName){
 		Team team = new Team();
 		team.name = tName;
-		for(int i = 0; i < 22; i++){
+		
+		Player[] player = new Player[20];
+		ArrayList<Player> playerList = new ArrayList<Player>();
+		for(int i = 0; i < player.length; i++){
 			String pname = team.name + " " + i + "번";
-			team.player[i] = new Player();
-			team.player[i].name = pname;
-			team.player[i].shoot = 70;
-			team.player[i].dribble = 70;
-			team.player[i].pass = 70;
-			team.player[i].stamina = 70;
-			team.player[i].speed = 70;
-			team.player[i].tackle = 70;
-			team.player[i].steal = 70;
-			team.player[i].gk = 70;
-			team.player[i].exp = 1000;
+			player[i] = new Player();
+			player[i].name = pname;
+			player[i].shoot = 70;
+			player[i].dribble = 70;
+			player[i].pass = 70;
+			player[i].stamina = 70;
+			player[i].speed = 70;
+			player[i].tackle = 70;
+			player[i].steal = 70;
+			player[i].gk = 70;
+			player[i].exp = 1000;
+			playerList.add(player[i]);
 		}
-		team.player[21].setNull();
+		team.setPlayer(playerList);
 		team.strategyA = 5;
 		team.strategyD = 5;
 		team.strategyF = 5;

@@ -59,7 +59,7 @@ public class Team implements Serializable {
     
     public String[]	printPlayer(){
     	String[] temp = new String[22];
-    	for(int i=0; i<22; i++){
+    	for(int i=0; i < playerList.size(); i++){
     		temp[i] = player[i].toString();
     	}
     	return temp;

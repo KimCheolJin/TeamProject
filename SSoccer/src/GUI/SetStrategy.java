@@ -44,7 +44,6 @@ public class SetStrategy extends JPanel {
 		JPanel T = new JPanel();
 		JLabel labelT1 = new JLabel("전체 전략");
 		JLabel labelT2 = new JLabel("수비 중시                      공격 중시");
-		System.out.println(tTeam.strategyT);
 		sliderT = new JSlider(JSlider.HORIZONTAL, 1, 9, tTeam.strategyT);
 		sliderT.setPaintTicks(true);
 		sliderT.setMajorTickSpacing(1);
