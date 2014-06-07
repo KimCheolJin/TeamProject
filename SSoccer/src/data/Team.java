@@ -12,7 +12,7 @@ public class Team implements Serializable {
 
 	//arraylist사용해야할듯
 	public ArrayList<Player> player2 = new ArrayList<Player>();
-	public Player player[] = new Player[22];
+	public Player player[];
 
 	public String name;
 	public int atkNum = 2;
@@ -44,9 +44,11 @@ public class Team implements Serializable {
 		this.colorB=cB;
 	}
     
-    public void setPlayer(Player[] p){
+    public void setPlayer(ArrayList<Player> p){
     	
-    	this.player=p;
+    	this.player2=p;
+    	player = new Player[player2.size()];
+    	this.listToArray();
     	
     	//이부분 에러떠서 일단 주석처리했어요
     	/* for(int i = 0; i < 21; i++){

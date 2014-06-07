@@ -3,6 +3,7 @@ package DBCENTER;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import store.Store;
 import data.User;
@@ -68,9 +69,9 @@ public class DBload {
 	}
 	
 	//DB로 부터 USER_PLAYER정보 로드
-    public Player[] loadPlayer(String id){
+    public ArrayList<Player> loadPlayer(String id){
 		
-		Player[] p = new Player[22];
+		ArrayList<Player> list = new ArrayList<Player>();
 		
 		Connection conn = DBconn.getConnection();
 
@@ -109,8 +110,8 @@ public class DBload {
 					int gk = rs.getInt(10);
 					int exp = rs.getInt(11);
 					
-					p[i]=new Player(primaryNum, pname, shoot, dribble, pass, stamina,
-							tackle, steal, speed, gk, exp);
+					list.add(new Player(primaryNum, pname, shoot, dribble, pass, stamina,
+							tackle, steal, speed, gk, exp));
 					
 					i++;
 					
@@ -126,7 +127,7 @@ public class DBload {
 		System.out.println("유저선수로드완료!!");
 		DBconn.close();
 		
-		return p;
+		return list;
     }
 	
 	

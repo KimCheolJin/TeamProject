@@ -19,7 +19,7 @@ public class Load {
 	protected User u;
 	protected Store st;
 	protected Team ut;
-	protected Player[] up;
+	protected ArrayList<Player> up;
 	protected Friend f;
 	protected String id;
 	
