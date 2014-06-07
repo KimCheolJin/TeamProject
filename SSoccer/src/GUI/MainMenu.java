@@ -10,8 +10,8 @@ import javax.swing.JTabbedPane;
 import match.data.MTeam;
 import data.Player;
 import data.Team;
-
 import data.Load;
+import data.TestLoad;
 
 public class MainMenu extends JFrame {
 	
@@ -32,6 +32,7 @@ public class MainMenu extends JFrame {
 		
 		//시작시 로드 한번 일어남
 		data = new Load(id);
+		//data = new TestLoad(id);
 		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
@@ -65,6 +66,7 @@ public class MainMenu extends JFrame {
 		add(tp);
 	}
 	
+<<<<<<< HEAD
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new MainMenu("TEAM");
@@ -95,4 +97,6 @@ public class MainMenu extends JFrame {
 		return team;
 	}
 	
+=======
+>>>>>>> origin/master
 }

@@ -18,6 +18,7 @@ public class Friend {
 	public void addFriend(String friendid,String nick){
 		list.add(friendid);
 		nickList.add(nick);
+		accept.add(0);
 	}
 	
 	public void updateFriend(){
@@ -25,12 +26,10 @@ public class Friend {
 	}
 	
 	public ArrayList<String> getFriendList(){
-	    String[] temp= this.list.toArray(new String[list.size()]); //arrayList -> String[]	
 	    return list;
 	}
 	
 	public ArrayList<String> getFriendNickList(){
-		String[] temp = this.nickList.toArray(new String[nickList.size()]);
 		return nickList;
 	}
 	

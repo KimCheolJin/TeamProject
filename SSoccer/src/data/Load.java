@@ -12,30 +12,28 @@ public class Load {
 	//DB이용
 	DBload dbl = new DBload();
 	//가지고있는변수들
-	User u;
-	Store st;
-	Team ut;
-	Player[] up;
-	Friend f;
+	protected User u;
+	protected Store st;
+	protected Team ut;
+	protected Player[] up;
+	protected Friend f;
 	
+	public Load(){}
 	
 	public Load(String id){
-		
 		st = dbl.loadStore();
 		u = dbl.loadUser(id);
 		up = dbl.loadPlayer(id);
 		ut = dbl.loadTeam(id);
 		ut.setPlayer(up);
-		
-		
 	}
 	
 	public Store getStore(){
-		return this.st;
+		return st;
 	}
 	
 	public Team getTeam(){
-		return this.ut;
+		return ut;
 	}
 
 	public User getUser() {

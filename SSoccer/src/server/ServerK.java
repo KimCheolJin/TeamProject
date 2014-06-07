@@ -89,11 +89,10 @@ public class ServerK extends JFrame implements Runnable {
 				while (true) {
 					String id = br[i].readLine();
 					for(j = 0; j < 64; j++){
-						if(id == ID[j]) break;
+						if(id.equals(ID[j])) break;
 					}
 					bw[i].write(accept[j]);
 					bw[i].flush();
-					
 					//matchIP = br[i].readLine();
 					//accept[i] = 2;
 				}

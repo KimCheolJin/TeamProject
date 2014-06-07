@@ -6,16 +6,20 @@ import data.Player;
 import java.util.ArrayList;
 
 public class Team implements Serializable {
+<<<<<<< HEAD
 	//arraylist사용해야할듯
 	public ArrayList<Player> player2;
 	public Player player[] ;
+=======
+	public Player player[] = new Player[22];
+>>>>>>> origin/master
 	public String name;
 	public int atkNum = 2;
 	public int midNum = 4;
 	public int defNum = 4;
-	public int strategyA; //5
-	public int strategyD; //5
- 	public int strategyT; //5
+	public int strategyA;
+	public int strategyD;
+ 	public int strategyT;
 	public int strategyF;
 	public int colorR, colorG, colorB;
 	
@@ -37,11 +41,13 @@ public class Team implements Serializable {
 		this.colorR=cR;
 		this.colorG=cG;
 		this.colorB=cB;
-		
 	}
     
     public void setPlayer(Player[] p){
-    	this.player=p;
+    	for(int i = 0; i < 21; i++){
+    		player[i] = p[i];
+    	}
+    	player[21].setNull();
     }
     
     public String[]	printPlayer(){
