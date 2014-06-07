@@ -16,11 +16,9 @@ public class Player implements Serializable {
 	public int gk;
 	public int exp;
 
-	public Player(String name) {
-		this.name = name;
-	}
 
 	public Player() {
+		name = "";
 	}
 
 	public Player(int primaryNum, String n, int s, int d, int p, int st, int tk, int sl,

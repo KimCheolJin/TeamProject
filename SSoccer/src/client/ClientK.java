@@ -14,7 +14,7 @@ import data.Load;
 import GUI.FriendGUI;
 import GUI.MainMenu;
 
-public class ClientK extends MainMenu implements Runnable {
+public class ClientK extends MainMenu {
 
 	int port = 1111;
 	String IP = "127.0.0.1";
@@ -27,11 +27,11 @@ public class ClientK extends MainMenu implements Runnable {
 	
 	public ClientK(String id) {
 		super(id);
-		sm = new SelectNetworkMatch(img, data, this);
 		setting(data);
+		
+		sm = new SelectNetworkMatch(img, data, this);
 		fg = new FriendGUI(data, bw, br);
 		tp.add("친구 목록", fg);
-		new Thread(this).start();
 	}
 	
 	public void setting(Load data) {
@@ -45,22 +45,6 @@ public class ClientK extends MainMenu implements Runnable {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-	}
-
-	public void run() {
-		/**
-		try {
-			while (true) {
-				String matchIP = br.readLine();
-				if(matchIP.equals(InetAddress.getLocalHost().getHostAddress()))
-					new Server(data.getTeam());
-				else
-					new Client(data.getTeam(), matchIP);
-			}
-		} catch (IOException e) {
-
-		}
-		**/
 	}
 	
 	public static void main(String args[]){

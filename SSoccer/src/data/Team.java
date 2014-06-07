@@ -10,9 +10,8 @@ import java.util.Collections;
 
 public class Team implements Serializable {
 
-	//arraylist사용해야할듯
-	public ArrayList<Player> player2 = new ArrayList<Player>();
-	public Player player[];
+	public ArrayList<Player> playerList = new ArrayList<Player>();
+	public Player player[] = new Player[22];
 
 	public String name;
 	public int atkNum = 2;
@@ -27,13 +26,12 @@ public class Team implements Serializable {
 	
 	public Team(){
 		for(int i = 0; i < 22; i++){
-			player[i] = new Player("");
-			player[i].setNull();
+			player[i] = new Player();
 		}
 	}
 	
     public Team( String name, int sA, int sD, int sT, int sF, int cR, int cG, int cB){
-    	this.player=null; //this(); 로 하면 오류 떠서 이걸로 오류 해결
+    	this();
     	this.name=name;
 		this.strategyA=sA;
 		this.strategyD=sD;
@@ -44,74 +42,51 @@ public class Team implements Serializable {
 		this.colorB=cB;
 	}
     
-    public void setPlayer(ArrayList<Player> p){
-    	
-    	this.player2=p;
-    	player = new Player[player2.size()];
-    	this.listToArray();
-    	
-    	//이부분 에러떠서 일단 주석처리했어요
-    	/* for(int i = 0; i < 21; i++){
-    		player[i] = p[i];
+    public void setPlayer(ArrayList<Player> playerList){
+    	this.playerList=playerList;
+    	setPlayer();
+    }
+    
+    public void setPlayer() {
+    	playerList.size();
+    	for(int i = 0; i < playerList.size(); i++){
+    		player[i] = playerList.get(i);
     	}
-    	player[21].setNull(); */ 
+    	for(int i = playerList.size(); i < 22; i++){
+    		player[i].setNull();
+    	}
     }
     
     public String[]	printPlayer(){
-    	
     	String[] temp = new String[22];
-    	
     	for(int i=0; i<22; i++){
     		temp[i] = player[i].toString();
     	}
-    	
     	return temp;
-    }
-    
-    //선수배열 list로 변환
-    public void arrayToList(){
-    	
-    	Collections.addAll(player2, player);
-    	
-    }
-    
-    //선수리스트 배열로 변환
-    public void listToArray(){
-    	
-    	player = player2.toArray(new Player[player2.size()]);
-    	
     }
     
     //팀에 선수 추가
     public void addPlayer(Player p){
-    	
-    	this.arrayToList();
-    	player2.add(p);
-    	this.listToArray();
+    	playerList.add(p);
+    	setPlayer();
     }
     
     //팀에 선수 제거
     public void removePlayer(int index){
-    	
-    	this.arrayToList();
-    	
-    	player2.remove(index);
-    	
-    	this.listToArray();
-    	
+    	playerList.remove(index);
+    	setPlayer();
     }
     
     //변수대신 list 이용해서 그냥 크기 반환
     public int getNumberOfPlayer(){
-    	
-    	this.arrayToList();
-    	return this.player2.size();
+    	return playerList.size();
     }
     
     public Player getPlayer(int index){
-    	
-    	this.arrayToList();
-    	return player2.get(index);
+    	try{
+    		return playerList.get(index);
+    	} catch(Exception e){}
+    	return null;
     }
 
 }

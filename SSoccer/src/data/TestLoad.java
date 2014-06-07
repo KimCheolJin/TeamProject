@@ -21,7 +21,8 @@ public class TestLoad extends Load {
 		team.name = tName;
 		for(int i = 0; i < 22; i++){
 			String pname = team.name + " " + i + "¹ø";
-			team.player[i] = new Player(pname);
+			team.player[i] = new Player();
+			team.player[i].name = pname;
 			team.player[i].shoot = 70;
 			team.player[i].dribble = 70;
 			team.player[i].pass = 70;

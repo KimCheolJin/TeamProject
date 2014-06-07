@@ -15,6 +15,10 @@ public class MTeam extends Team {
 		super();
 		name = t.name;
 		setPosition(t);
+		strategyA = t.strategyA;
+		strategyD = t.strategyD;
+		strategyT = t.strategyT;
+		strategyF = t.strategyF;
 		colorR = t.colorR;
 		colorG = t.colorG;
 		colorB = t.colorB;

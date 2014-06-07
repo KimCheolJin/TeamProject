@@ -14,7 +14,7 @@ import data.Load;
 public class SelectMatch extends JPanel implements ActionListener {
 
 	Image img;
-	Load data;
+	protected Load data;
 	MainMenu mainmenu;
 	
 	public SelectMatch(Image img, Load data, MainMenu mainmenu) {

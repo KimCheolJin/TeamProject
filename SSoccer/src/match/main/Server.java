@@ -66,7 +66,8 @@ public class Server {
 		team.name = tName;
 		for(int i = 0; i < 22; i++){
 			String pname = team.name + " " + i + "¹ø";
-			team.player[i] = new Player(pname);
+			team.player[i] = new Player();
+			team.player[i].name = pname;
 			team.player[i].shoot = 70;
 			team.player[i].dribble = 70;
 			team.player[i].pass = 70;
@@ -75,13 +76,19 @@ public class Server {
 			team.player[i].tackle = 70;
 			team.player[i].steal = 70;
 			team.player[i].gk = 70;
+			team.player[i].exp = 1000;
 		}
+		team.player[21].setNull();
+		team.strategyA = 5;
+		team.strategyD = 5;
+		team.strategyF = 5;
+		team.strategyT = 5;
 		team.colorR = (int) (Math.random() * 256);
 		team.colorG = (int) (Math.random() * 256);
 		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
-	
+
 	public static void main(String args[]){
 		new Server(makeTeam("¸ÇÀ¯"));
 	}

@@ -26,13 +26,13 @@ public class MainMenu extends JFrame {
 	private StoreNew sn;
 	private StoreOld so;
 	private StoreUp  su;
-	protected FriendGUI fg;
+	public FriendGUI fg;
 	
 	public MainMenu(String id){
 		
 		//시작시 로드 한번 일어남
-		data = new Load(id);
-		//data = new TestLoad(id);
+		//data = new Load(id);
+		data = new TestLoad(id);
 		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
@@ -71,30 +71,6 @@ public class MainMenu extends JFrame {
 		// TODO Auto-generated method stub
 		new MainMenu("TEAM");
 		//new MainMenu(makeTeam("팀이름"));
-	}
-
-	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
-	public static Team makeTeam(String tName){
-		Team team = new Team();
-		team.name = tName;
-		for(int i = 0; i < 22; i++){
-			String pname = team.name + " " + i + "번";
-			team.player[i] = new Player(pname);
-			team.player[i].shoot = 70;
-			team.player[i].dribble = 70;
-			team.player[i].pass = 70;
-			team.player[i].stamina = 70;
-			team.player[i].speed = 70;
-			team.player[i].tackle = 70;
-			team.player[i].steal = 70;
-			team.player[i].gk = 70;
-			team.player[i].exp = 1000;
-		}
-		team.player[21].setNull();
-		team.colorR = (int) (Math.random() * 256);
-		team.colorG = (int) (Math.random() * 256);
-		team.colorB = (int) (Math.random() * 256);
-		return team;
 	}
 	
 

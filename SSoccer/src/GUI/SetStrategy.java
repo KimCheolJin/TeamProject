@@ -44,6 +44,7 @@ public class SetStrategy extends JPanel {
 		JPanel T = new JPanel();
 		JLabel labelT1 = new JLabel("전체 전략");
 		JLabel labelT2 = new JLabel("수비 중시                      공격 중시");
+		System.out.println(tTeam.strategyT);
 		sliderT = new JSlider(JSlider.HORIZONTAL, 1, 9, tTeam.strategyT);
 		sliderT.setPaintTicks(true);
 		sliderT.setMajorTickSpacing(1);
@@ -103,13 +104,13 @@ public class SetStrategy extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					int i = 0;
 					for (int j = 0; j < 22; j++) {
-						if (tTeam.player[i].name != null)
+						if (tTeam.player[i].name != "")
 							i = j;
 					}
 					for (int j = 0; j < 22; j++) {
 						if (e.getSource() == player[j]) {
 							tTeam.player[i] = tTeam.player[j];
-							tTeam.player[j] = new MPlayer(new Player(null));
+							tTeam.player[j] = new MPlayer(new Player());
 						}
 					}
 					for (i = 0; i < 22; i++) {

@@ -21,13 +21,14 @@ public class AIMode {
 		new EditStrategy(home, gm.homeInfo);
 	}
 
-	// 임시 메소드. 팀과 그 팀의 구성원들을 생성.
-	public static Team makeTeam(String tName) {
+	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
+	public static Team makeTeam(String tName){
 		Team team = new Team();
 		team.name = tName;
-		for (int i = 0; i < 22; i++) {
+		for(int i = 0; i < 22; i++){
 			String pname = team.name + " " + i + "번";
-			team.player[i] = new Player(pname);
+			team.player[i] = new Player();
+			team.player[i].name = pname;
 			team.player[i].shoot = 70;
 			team.player[i].dribble = 70;
 			team.player[i].pass = 70;
@@ -36,12 +37,19 @@ public class AIMode {
 			team.player[i].tackle = 70;
 			team.player[i].steal = 70;
 			team.player[i].gk = 70;
+			team.player[i].exp = 1000;
 		}
+		team.player[21].setNull();
+		team.strategyA = 5;
+		team.strategyD = 5;
+		team.strategyF = 5;
+		team.strategyT = 5;
 		team.colorR = (int) (Math.random() * 256);
 		team.colorG = (int) (Math.random() * 256);
 		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
+
 
 	public static void main(String args[]) {
 		new AIMode(makeTeam("맨유"), makeTeam("맨시티"));
