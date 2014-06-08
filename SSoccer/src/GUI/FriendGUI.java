@@ -139,13 +139,13 @@ public class FriendGUI extends JPanel implements Runnable {
 					bw.write(data.getFriend().getFriends().get(i).getFriendId());
 					bw.newLine();
 					bw.flush();
-					data.getFriend().getAcceptList().set(i, br.read());
-					if(data.getFriend().getAcceptList().get(i) == 0)
-						offAir.add(data.getFriend().getFriendNickList().get(i));
-					else if(data.getFriend().getAcceptList().get(i) == 1)
-						onAir.add(data.getFriend().getFriendNickList().get(i));
-					else if(data.getFriend().getAcceptList().get(i) == 2)
-						onMatch.add(data.getFriend().getFriendNickList().get(i));
+					data.getFriend().getFriends().get(i).setAccept(br.read());
+					if(data.getFriend().getFriends().get(i).getAccept() == 0)
+						offAir.add(data.getFriend().getFriends().get(i).getFriendNick());
+					else if(data.getFriend().getFriends().get(i).getAccept() == 1)
+						onAir.add(data.getFriend().getFriends().get(i).getFriendNick());
+					else if(data.getFriend().getFriends().get(i).getAccept() == 2)
+						onMatch.add(data.getFriend().getFriends().get(i).getFriendNick());
 				}
 				offAirList.setListData(offAir.toArray(new String[offAir.size()]));
 				onAirList.setListData(onAir.toArray(new String[onAir.size()]));
