@@ -186,7 +186,7 @@ public class FriendGUI extends JPanel implements Runnable,
 			game.setVisible(true);
 			trade.setVisible(true);
 		} else if (e.getSource() == onMatchList) {
-			index = onAirList.getSelectedIndex();
+			index = onMatchList.getSelectedIndex();
 			if(index == -1) return;
 			ID = onMatchID.get(index);
 			game.setVisible(false);
