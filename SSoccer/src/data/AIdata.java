@@ -16,7 +16,7 @@ public class AIdata {
 	}
 	
 	//Player형 list로 받음
-	public void setTeam(int num,ArrayList<Player> list ){
+	public void setTeam(ArrayList<Player> list ){
 		
 		//0~9랜덤
 		randomNumber = (int)(Math.random()*10);
@@ -26,29 +26,31 @@ public class AIdata {
 		String tempName="아스널"; //디폴트값 설정 안할시 에러
 		ArrayList<Player> templist = new ArrayList<Player>();
 		
+		int num=0;
+		
 		//해당하는 선수정보 가져옴
-		if(num==0){
+		if(randomNumber==0){
 			//아스널로 선택됨
 			
 			tempName="아스널";
 			
-			for(int i=0; i<22; i++){
-				templist.add(list.get(i));
-			}
+			num=0;
 			
 		}
-		else if(num==1){
+		else if(randomNumber==1){
 			//맨시티로 선택됨
 			
 			tempName="맨시티";
 			
-			for(int i=22; i<44; i++){
-				templist.add(list.get(i));
-			}
+			num=22;
 			
 		}
 		else{
 		
+		}
+		
+		for(int i=num; i<num+21; i++){
+			templist.add(list.get(i));
 		}
 		
 		//DB에서 팀정보 가져옴
@@ -60,7 +62,7 @@ public class AIdata {
 	//getTeam할때마다 랜덤으로 팀바뀜
 	public Team getTeam(Load data){
 		
-		this.setTeam(randomNumber, data.getStore().getNewPlayer());
+		this.setTeam(data.getStore().getNewPlayer());
 		return this.t;
 	}
 

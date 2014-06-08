@@ -140,7 +140,7 @@ public class DBLogin {
 				
 				
 				//팀에맞는 선수들 id_PLAYER로 전달하는 부분
-				for(int i=k; i<k+22; i++){	
+				for(int i=k; i<k+21; i++){	
 					
 					sql = "INSERT INTO "+id+"_PLAYER(pnum,pname,shoot,dribble,pass,stamina,tackle,steal,speed,gk,exp)"+
 							"VALUES(?,?,?,?,?,?,?,?,?,?,?)";

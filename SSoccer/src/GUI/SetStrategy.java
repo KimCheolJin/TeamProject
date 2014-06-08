@@ -48,6 +48,19 @@ public class SetStrategy extends JPanel {
 		draw();
 	}
 	
+	public SetStrategy(Team team){
+		this.team = team;
+		
+		tTeam = new TemporaryTeam(team);
+		setLayout(null);
+		setSize(540, 380);
+		setStrategyPanel(0, 55);
+		setChangePanel(200, 0);
+		setFomation(0, 15);
+		setOkCancel();
+		draw();
+	}
+	
 	public void setStrategyPanel(int x, int y) {
 		JPanel T = new JPanel();
 		JLabel labelT1 = new JLabel("전체 전략");

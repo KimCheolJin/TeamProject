@@ -18,7 +18,7 @@ public class EditStrategy extends SetStrategy {
 
 	//멀티플레이 모드 생성자
 	public EditStrategy(final MTeam team, final TeamInfo teaminfo, final ObjectOutputStream oosm) {
-		super(team);//흠 이부분에 오류나네요
+		super(team);
 		this.team = team;
 		tTeam = new TemporaryTeam(team);
 		this.teaminfo = teaminfo;
