@@ -11,8 +11,8 @@ public class Friend {
 		
 	}
 
-	public void addFriend(String friendid,String nick){
-		list.add(new FriendsInfo(friendid,nick));
+	public void addFriend(String friendid,String nick, int win, int lose, int draw, int score1, int score2){
+		list.add(new FriendsInfo(friendid,nick,win,lose,draw,score1,score2));
 	}
 	
 	public void updateFriend(){

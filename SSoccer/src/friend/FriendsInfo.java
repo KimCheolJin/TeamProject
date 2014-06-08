@@ -11,13 +11,10 @@ public class FriendsInfo {
 	private int score1; //µÊ¡°
 	private int score2; //Ω«¡°
 
-	public FriendsInfo(String id, String nick){
-		this.friendId=id;
-		this.friendNick=nick;
-	}
 	
 	public FriendsInfo(String id, String nick, int win, int lose, int draw, int score1, int score2){
-		this(id, nick);
+		this.friendId=id;
+		this.friendNick=nick;
 		this.win = win;
 		this.lose = lose;
 		this.draw = draw;

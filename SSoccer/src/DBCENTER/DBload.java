@@ -213,26 +213,36 @@ public class DBload {
 				
 				while(rs.next()){
 					
+					System.out.println("친구정보불러오는중--");
 					//win, draw, lose, score1, score2 받도록 수정
-					String temp = rs.getString(2);
+					String fid = rs.getString(2); //친구ID받음
+					
+					int win = rs.getInt(3);
+					int draw = rs.getInt(4);
+					int lose = rs.getInt(5);
+					int score1 = rs.getInt(6);
+					int score2 = rs.getInt(7);
 					
 					
-					String sql2 = "SELECT UUNAME FROM UUSER WHERE = ?";
+					String sql2 = "SELECT UUNAME FROM UUSER WHERE UUID = ?";
 					
 					PreparedStatement psmt2 = conn.prepareStatement(sql2);
 					
-					psmt2.setString(1,temp);
+					psmt2.setString(1,fid);
 					
 					ResultSet rs2 = null;
 					rs2 = psmt2.executeQuery();
 					
+					String nick = rs2.getString(4);
+					
 					//id에 맞는 nick가져와서 id,nick을 친구목록에저장
-					f.addFriend(temp,rs2.getString(2));
+					f.addFriend(fid,nick,win,draw,lose,score1,score2);
 					
 					psmt2.close();
 					
 				}
 				
+				System.out.println("친구정보불러오기완료!!");
 				psmt.close();
 				
 			}
