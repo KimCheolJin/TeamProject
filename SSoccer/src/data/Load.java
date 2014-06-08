@@ -32,6 +32,7 @@ public class Load {
 		this.id=id;
 		st = dbl.loadStore();
 		u = dbl.loadUser(id);
+		f = dbl.loadFriend(id);
 		up = dbl.loadPlayer(id);
 		ut = dbl.loadTeam(id);
 		ut.setPlayer(up);

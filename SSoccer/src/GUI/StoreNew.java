@@ -36,6 +36,7 @@ public class StoreNew extends JPanel {
 	
 	JButton getit;
 	JButton search;
+	JButton reset;
 	
 	JComboBox<String> shoot;
 	JComboBox<String> dribble;
@@ -145,6 +146,41 @@ public class StoreNew extends JPanel {
 		search.setBounds(10, 255, 150, 20);
 		add(search);
 		
+		search.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				String svalue = shoot.getSelectedItem().toString().substring(0, 2);
+				String dvalue = dribble.getSelectedItem().toString().substring(0, 2);
+				String pvalue = pass.getSelectedItem().toString().substring(0, 2);
+				String stvalue = stamina.getSelectedItem().toString().substring(0, 2);
+				String tvalue = tackle.getSelectedItem().toString().substring(0, 2);
+				String slvalue = steal.getSelectedItem().toString().substring(0, 2);
+				String spvalue = speed.getSelectedItem().toString().substring(0, 2);
+				String gkvalue = gk.getSelectedItem().toString().substring(0, 2);
+ 				
+				//조건에 맞는 검색을위해 전달 후 String[]받음
+				String[] completed = data.getStore().searchNewPlayer(svalue, dvalue, pvalue, stvalue, tvalue, slvalue, spvalue, gkvalue);
+				
+				list.setListData(completed);
+				list.repaint();
+			}
+		});
+		
+		//초기화버튼부분
+		reset = new JButton("초기화");
+		reset.setBounds(180, 255, 150, 20);
+		add(reset);
+		
+		reset.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				//리스트 초기화 해줌
+				String[] re = data.getStore().getnp(); 
+				list.setListData(re);
+				list.repaint();
+			}
+		});
+		
 		//슛
 		s1 = new JLabel("Shoot");
 		s1.setBounds(10, 290, 40, 25);
@@ -213,7 +249,7 @@ public class StoreNew extends JPanel {
 		s8.setBounds(410, 320, 50, 25);
 		add(s8);
 			
-		gk = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		gk = new JComboBox<String>(new String[] {"80이상","70이상","60이상","50이상","00이상"});
 		gk.setBounds(460, 320, 70, 25);
 		add(gk);
 		

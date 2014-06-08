@@ -317,6 +317,7 @@ public class DBload {
 					i=0;
 					while (rs2.next()) {
 						
+						//수정이필요함
 						System.out.println("로드2실행중---"+i);
 						int primaryNum = rs2.getInt(1);
 						String pname = rs2.getString(2);

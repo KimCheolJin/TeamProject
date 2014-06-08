@@ -100,6 +100,10 @@ public class StoreUp extends JPanel {
 					data.sellPlayer(selectedIndex,pri);
 					Massage ms = new Massage("등록완료!!");
 					
+					String[] after = data.getTeam().printPlayer();
+					list.setListData(after);
+					list.repaint();
+					
 					
 				}
 				else{

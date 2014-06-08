@@ -38,7 +38,7 @@ public class StoreOld extends JPanel {
 	
 	JButton getit;
 	JButton search;
-	JButton up;
+	JButton reset;
 	
 	JComboBox<String> shoot;
 	JComboBox<String> dribble;
@@ -126,6 +126,12 @@ public class StoreOld extends JPanel {
 						else{
 							data.buyOldPlayer(selectedIndex);
 							Massage ms = new Massage("영입완료!!");
+							
+							//구매한 선수이제 목록에서 빼주기
+							String[] sub = data.getStore().getop();
+							list.setListData(sub);
+							list.repaint();
+							
 						}
 						
 						
@@ -146,6 +152,41 @@ public class StoreOld extends JPanel {
 		search = new JButton("능력치 검색");
 		search.setBounds(10, 255, 150, 20);
 		add(search);
+		
+		search.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				String svalue = shoot.getSelectedItem().toString().substring(0, 2);
+				String dvalue = dribble.getSelectedItem().toString().substring(0, 2);
+				String pvalue = pass.getSelectedItem().toString().substring(0, 2);
+				String stvalue = stamina.getSelectedItem().toString().substring(0, 2);
+				String tvalue = tackle.getSelectedItem().toString().substring(0, 2);
+				String slvalue = steal.getSelectedItem().toString().substring(0, 2);
+				String spvalue = speed.getSelectedItem().toString().substring(0, 2);
+				String gkvalue = gk.getSelectedItem().toString().substring(0, 2);
+ 				
+				//조건에 맞는 검색을위해 전달 후 String[]받음
+				String[] completed = data.getStore().searchOldPlayer(svalue, dvalue, pvalue, stvalue, tvalue, slvalue, spvalue, gkvalue);
+				
+				list.setListData(completed);
+				list.repaint();
+			}
+		});
+		
+		//초기화버튼부분
+				reset = new JButton("초기화");
+				reset.setBounds(180, 255, 150, 20);
+				add(reset);
+				
+				reset.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						
+						//리스트 초기화 해줌
+						String[] re = data.getStore().getop(); 
+						list.setListData(re);
+						list.repaint();
+					}
+				});
 		
 		//슛
 		s1 = new JLabel("Shoot");
