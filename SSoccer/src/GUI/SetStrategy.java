@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -123,8 +124,7 @@ public class SetStrategy extends JPanel {
 	}
 	
 	public void setFomation(int x, int y) {
-		String fmt[] = {"2-3-5", "3-4-3", "4-3-3", "3-5-2", "4-4-2", "5-3-2", "6-3-1" };
-		Formation = new JComboBox<String>(fmt);
+		Formation = new JComboBox<String>(Team.fmt);
 		Formation.setSelectedIndex(tTeam.strategyF);
 		Formation.setBounds(x + 10, y, 180, 25);
 		Formation.addItemListener(new ItemListener(){

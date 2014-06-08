@@ -4,13 +4,9 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import client.FriendGUI;
-import match.data.MTeam;
-import data.Player;
-import data.Team;
 import data.Load;
 import data.TestLoad;
 

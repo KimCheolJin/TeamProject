@@ -5,8 +5,6 @@ import java.io.Serializable;
 import data.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Team implements Serializable {
 
@@ -14,32 +12,36 @@ public class Team implements Serializable {
 	public Player player[] = new Player[22];
 
 	public String name;
-	public int atkNum = 2;
-	public int midNum = 4;
-	public int defNum = 4;
 	public int strategyA;
 	public int strategyD;
  	public int strategyT;
 	public int strategyF;
 	public int colorR, colorG, colorB;
 	
-	
-	public Team(){
-		for(int i = 0; i < 22; i++){
-			player[i] = new Player();
-		}
-	}
+	public int defNum;
+	public int midNum;
+	public int atkNum;
+		
+	public static String fmt[] = {"2-3-5", "3-4-3", "4-3-3", "3-5-2", "4-4-2", "5-3-2", "6-3-1"};
 	
     public Team( String name, int sA, int sD, int sT, int sF, int cR, int cG, int cB){
-    	this();
-    	this.name=name;
-		this.strategyA=sA;
+    	for(int i = 0; i < 22; i++)
+    		player[i] = new Player();
+    	this.strategyA=sA;
 		this.strategyD=sD;
 		this.strategyT=sT;
 		this.strategyF=sF;
+		this.name=name;
 		this.colorR=cR;
 		this.colorG=cG;
 		this.colorB=cB;
+		setFormation();
+	}
+    
+	private void setFormation() {
+		defNum = fmt[strategyF].charAt(0) - 48;
+		midNum = fmt[strategyF].charAt(2) - 48;
+		atkNum = fmt[strategyF].charAt(4) - 48;	
 	}
     
     public void setPlayer(ArrayList<Player> playerList){
@@ -58,8 +60,6 @@ public class Team implements Serializable {
     }
     
     public String[]	printPlayer(){
-
-    	
     	String[] temp = new String[playerList.size()];
     	for(int i=0; i<playerList.size(); i++){
     		temp[i] = player[i].toString();

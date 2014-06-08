@@ -12,17 +12,11 @@ public class MTeam extends Team {
 	public int score = 0;
 	
 	public MTeam(Team t) {
-		super();
-		name = t.name;
+		super(t.name, t.strategyA, t.strategyD, t.strategyT, t.strategyF,
+				t.colorR, t.colorG, t.colorB);
 		setPosition(t);
-		strategyA = t.strategyA;
-		strategyD = t.strategyD;
-		strategyT = t.strategyT;
-		strategyF = t.strategyF;
-		colorR = t.colorR;
-		colorG = t.colorG;
-		colorB = t.colorB;
 	}
+
 
 	private void setPosition(Team t) {
 		for (int i = 0; i < 22; i++) {

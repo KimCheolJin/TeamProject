@@ -19,7 +19,8 @@ public class TestLoad extends Load {
 
 	//임시 메소드. 팀과 그 팀의 구성원들을 생성.
 	public Team makeTeam(String tName){
-		Team team = new Team();
+		Team team = new Team(tName, 5, 5, 5, 4, (int) (Math.random() * 256), 
+				(int) (Math.random() * 256), (int) (Math.random() * 256));
 		team.name = tName;
 		
 		Player[] player = new Player[20];
@@ -40,13 +41,6 @@ public class TestLoad extends Load {
 			playerList.add(player[i]);
 		}
 		team.setPlayer(playerList);
-		team.strategyA = 5;
-		team.strategyD = 5;
-		team.strategyF = 5;
-		team.strategyT = 5;
-		team.colorR = (int) (Math.random() * 256);
-		team.colorG = (int) (Math.random() * 256);
-		team.colorB = (int) (Math.random() * 256);
 		return team;
 	}
 
