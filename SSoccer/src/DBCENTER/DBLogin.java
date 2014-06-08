@@ -243,7 +243,7 @@ public class DBLogin {
 	}
 
 	// 회원가입시 중복된 ID DB에서 검색
-	public int serchSameID(String s) {
+	public int serchSameID(String id) {
 
 		Connection conn = DBconn.getConnection();
 
@@ -268,7 +268,7 @@ public class DBLogin {
 				while (rs.next()) {
 					
 					String temp = rs.getString(2);
-					if (s.equals(temp))
+					if (id.equals(temp))
 						k++;
 				}
 

@@ -1,6 +1,8 @@
 package client;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,11 +21,19 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import login.Massage;
 import data.Load;
 import friend.FriendsInfo;
 
+import DBCENTER.DBdata;
+import DBCENTER.DBLogin;
+
 public class FriendGUI extends JPanel implements Runnable,
 		ListSelectionListener {
+	
+	//DB이용
+	DBdata dbd = new DBdata();
+	DBLogin dblogin = new DBLogin();
 
 	Load data;
 
@@ -53,7 +63,7 @@ public class FriendGUI extends JPanel implements Runnable,
 		this.data = data;
 
 		setList();
-		setOther();
+		setOther(data.getUser().getUserID());
 
 		this.bw = bw;
 		this.br = br;
@@ -98,7 +108,7 @@ public class FriendGUI extends JPanel implements Runnable,
 		add(offAirLabel);
 	}
 
-	private void setOther() {
+	private void setOther(final String id) {
 		// 친구등록부분
 
 		JLabel j2 = new JLabel("친구등록");
@@ -109,9 +119,33 @@ public class FriendGUI extends JPanel implements Runnable,
 		inputName.setBounds(230, 50, 150, 30);
 		add(inputName);
 
+		//등록버튼
 		getit = new JButton("등록");
 		getit.setBounds(390, 50, 70, 30);
 		add(getit);
+		
+		getit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				//친구등록시 등록한 친구이름 받음
+				String temp = inputName.getText();
+				
+				if(dblogin.serchSameID(temp)==0){
+					
+					//uuser테이블에 사용자가 없는경우 오류메세지 띄움
+					Massage ms = new Massage("그런친구는없습니다!!");
+				}
+				else{
+					
+					//uuser테이블에 사용자 있음 친구등록 실행
+					dbd.putFriends(id, temp);
+					Massage ms = new Massage("친구등록완료!!");
+				}
+				
+			}
+				
+			
+		});
 
 		// 친구정보부분
 		JLabel j3 = new JLabel("친구정보");

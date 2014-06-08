@@ -104,7 +104,6 @@ public class StoreUp extends JPanel {
 					list.setListData(after);
 					list.repaint();
 					
-					
 				}
 				else{
 					

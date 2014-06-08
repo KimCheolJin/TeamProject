@@ -194,6 +194,7 @@ public class SetStrategy extends JPanel {
 		
 		if(eleven){
 			tTeam.getData(team);
+			
 		}
 		
 	}	

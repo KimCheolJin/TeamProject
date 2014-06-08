@@ -186,7 +186,7 @@ public class StoreNew extends JPanel {
 		s1.setBounds(10, 290, 40, 25);
 		add(s1);
 	
-		shoot = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		shoot = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		shoot.setBounds(60, 290, 70, 25);
 		add(shoot);
 		
@@ -195,7 +195,7 @@ public class StoreNew extends JPanel {
 		s2.setBounds(10, 320, 50, 25);
 		add(s2);
 	
-		dribble = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		dribble = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		dribble.setBounds(60, 320, 70, 25);
 		add(dribble);
 		
@@ -204,7 +204,7 @@ public class StoreNew extends JPanel {
 		s3.setBounds(140, 290, 40, 25);
 		add(s3);
 	
-		pass = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		pass = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		pass.setBounds(190, 290, 70, 25);
 		add(pass);
 		
@@ -213,7 +213,7 @@ public class StoreNew extends JPanel {
 		s4.setBounds(140, 320, 50, 25);
 		add(s4);
 	
-		stamina = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		stamina = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		stamina.setBounds(190, 320, 70, 25);
 		add(stamina);
 		
@@ -222,7 +222,7 @@ public class StoreNew extends JPanel {
 		s5.setBounds(270, 290, 40, 25);
 		add(s5);
 			
-		tackle = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		tackle = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		tackle.setBounds(320, 290, 70, 25);
 		add(tackle);
 				
@@ -231,7 +231,7 @@ public class StoreNew extends JPanel {
 		s6.setBounds(270, 320, 50, 25);
 		add(s6);
 			
-		steal = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		steal = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		steal.setBounds(320, 320, 70, 25);
 		add(steal);
 		
@@ -240,7 +240,7 @@ public class StoreNew extends JPanel {
 		s7.setBounds(410, 290, 40, 25);
 		add(s7);
 			
-		speed = new JComboBox<String>(new String[] {"90이상","80이상","70이상","60이상","50이상"});
+		speed = new JComboBox<String>(new String[] {"90이상","70이상","50이상","30이상","10이상"});
 		speed.setBounds(460, 290, 70, 25);
 		add(speed);
 				
@@ -249,7 +249,7 @@ public class StoreNew extends JPanel {
 		s8.setBounds(410, 320, 50, 25);
 		add(s8);
 			
-		gk = new JComboBox<String>(new String[] {"80이상","70이상","60이상","50이상","00이상"});
+		gk = new JComboBox<String>(new String[] {"80이상","70이상","60이상","50이상"});
 		gk.setBounds(460, 320, 70, 25);
 		add(gk);
 		

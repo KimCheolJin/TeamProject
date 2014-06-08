@@ -214,7 +214,8 @@ public class DBload {
 				while(rs.next()){
 					
 					System.out.println("친구정보불러오는중--");
-					//win, draw, lose, score1, score2 받도록 수정
+					
+					
 					String fid = rs.getString(2); //친구ID받음
 					
 					int win = rs.getInt(3);
@@ -224,7 +225,7 @@ public class DBload {
 					int score2 = rs.getInt(7);
 					
 					
-					String sql2 = "SELECT UUNAME FROM UUSER WHERE UUID = ?";
+					String sql2 = "SELECT * FROM UUSER WHERE UUID = ?";
 					
 					PreparedStatement psmt2 = conn.prepareStatement(sql2);
 					
@@ -354,5 +355,61 @@ public class DBload {
 
 			return st; //Store반환하면서 db종료
 		}
+	
+	public Team loadAIteam(String tname){
+		
+        Team t = null;
+		
+		Connection conn = DBconn.getConnection();
+
+		if (conn == null) {
+			System.out.println("데이터베이스 연결 실패!!");
+			System.exit(0);
+		} else {
+			System.out.println("데이터베이스 연결 성공!!");
+
+			try {
+				
+				//팀테이블에서 팀에 맞는 값 찾음
+				String sql = "SELECT * FROM TEAM WHERE TNAME=?";
+					
+				PreparedStatement psmt = conn.prepareStatement(sql);
+
+				psmt.setString(1, tname);
+				
+				ResultSet rs = null;
+				rs = psmt.executeQuery();
+				
+				while(rs.next()){
+					
+					System.out.println("AI팀정보로드시작!!");
+					String name = tname;
+					int strategyA= rs.getInt(3);
+					int strategyD= rs.getInt(4);
+					int strategyT= rs.getInt(5);
+					int strategyF= rs.getInt(2);
+					int colorR= rs.getInt(6);
+					int colorG= rs.getInt(7);
+					int colorB= rs.getInt(8);
+					
+					t = new Team(name,strategyA, strategyD,strategyT, strategyF,colorR,colorG,colorB );
+					
+				}
+				
+				System.out.println("AI팀정보로드완료!!");
+				psmt.close();
+				
+			}
+			catch(Exception e){
+				System.out.println(e.toString());
+			}
+		}
+
+		
+		DBconn.close();
+		
+		return t;
+		
+	}
 
 }

@@ -54,8 +54,21 @@ public class Load {
 		return f;
 	}
 	
+	
 	//추가적으로 여기서 로드작업 외 여러 메소드 실행
 
+	//update메소드 현재는 전체했으나 나중에 세부적으로만 진행 될 수 도 있다
+	public void upDate(){
+		
+		st = dbl.loadStore();
+		//u = dbl.loadUser(id);
+		f = dbl.loadFriend(id);
+		up = dbl.loadPlayer(id);
+		//ut = dbl.loadTeam(id);
+		ut.setPlayer(up);
+		
+	}
+	
 	//신규선수구매메소드
 	 public void buyNewPlayer(int index){
 		 
@@ -65,6 +78,7 @@ public class Load {
 		u.changeMoney(-temp.getPrice());
 		
 	}
+	 
 	 
 	 //이적시장선수구매메소드
 	 public void buyOldPlayer(int index){
@@ -76,6 +90,7 @@ public class Load {
 		 
 		}
 	 
+	 
 	 //선수판매메소드
 	 public void sellPlayer(int index, int pri){
 		 
@@ -83,7 +98,14 @@ public class Load {
 		 ut.removePlayer(index);
 		 st.addoldPlayer(temp.primaryNum, temp.name, temp.shoot, temp.dribble, temp.pass, temp.stamina, temp.tackle, temp.steal, temp.speed, temp.gk, temp.exp, pri);
 		 dbd.sellPlayer(temp, pri, id);
-		 u.changeMoney(pri);
+	 }
+	 
+	 
+	 //친구등록하는부분
+	 public void putFriend(String userid, String friendid){
+		 
+		 String nick = dbd.putFriends(userid, friendid);
+		 f.addFriend(friendid, nick, 0, 0, 0, 0, 0);
 		 
 		 
 	 }
