@@ -36,17 +36,17 @@ public class MainMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		setCompo();
+		setCompo(id);
 		makeTab();
 		
 		setVisible(true);
 	}
 	
-	protected void setCompo(){		
+	protected void setCompo(String id){		
 		tp = new JTabbedPane();
 		sm = new SelectMatch(data, this);
-		ss = new SetStrategy(data.getTeam());
-		tr = new Training(data.getTeam());
+		ss = new SetStrategy(data.getTeam(),id);
+		tr = new Training(data.getTeam(), id);
 		sn = new StoreNew(data);
 		so = new StoreOld(data);
 		su = new StoreUp(data);

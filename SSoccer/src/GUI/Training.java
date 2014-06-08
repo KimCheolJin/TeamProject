@@ -14,6 +14,8 @@ import data.Player;
 import data.Team;
 import data.TemporaryTeam;
 
+import DBCENTER.DBdata;
+
 public class Training extends JPanel {
 	
 	private JButton player[] = new JButton[22];
@@ -27,11 +29,15 @@ public class Training extends JPanel {
 
 	private Player p;
 	
-	public Training(Team team) {
+	DBdata dbd = new DBdata();
+	String tempid;
+	
+	public Training(Team team,String id) {
 		setLayout(null);
 		setSize(540, 380);
 
 		this.team = team;
+		this.tempid = id;
 		tTeam = new TemporaryTeam(team);
 		setBtn();
 		setOkCancel();
@@ -81,6 +87,8 @@ public class Training extends JPanel {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tTeam.getData(team);
+				dbd.UpdateUserPlayer(team, tempid);
+				
 			}
 		});
 		add(ok);

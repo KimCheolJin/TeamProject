@@ -233,7 +233,7 @@ public class DBdata {
     	
     }
     
-    public void putUserTeam(Team t,String id){
+    public void UpdateUserTeam(Team t,String id){
     	
     	Connection conn = DBconn.getConnection();
 
@@ -271,6 +271,60 @@ public class DBdata {
 		DBconn.close();
     }
     
+    public void UpdateUserPlayer(Team t,String id){
+    	
+    	Connection conn = DBconn.getConnection();
+
+		if (conn == null) {
+			System.out.println("데이터베이스 연결 실패!!");
+			System.exit(0);
+		} else {
+			System.out.println("데이터베이스 연결 성공!!");
+
+			try {
+				
+				String sql;
+				
+				
+				for(int i=0; i<t.playerList.size(); i++){
+					
+					sql = "UPDATE "+id+"_PLAYER"
+							+ "SET SHOOT = ?, DRIBBLE=?, PASS=?, STAMINA=?,"
+							+ "TACKLE=?, STEAL=?, SPEED=?, GK=?"
+							+ "WHERE PNUM = ?";
+					
+					PreparedStatement psmt = conn.prepareStatement(sql);
+					
+					
+					psmt.setInt(1, t.getPlayer(i).shoot);
+					psmt.setInt(2, t.getPlayer(i).dribble);
+					psmt.setInt(3, t.getPlayer(i).pass);
+					psmt.setInt(4, t.getPlayer(i).stamina);
+					psmt.setInt(5, t.getPlayer(i).tackle);
+					psmt.setInt(6, t.getPlayer(i).steal);
+					psmt.setInt(7, t.getPlayer(i).speed);
+					psmt.setInt(8, t.getPlayer(i).gk);
+					psmt.setInt(9, t.getPlayer(i).primaryNum);
+					
+					psmt.executeUpdate();
+					
+					psmt.close();
+					
+					
+				}
+				
+				
+				
+				System.out.println(id+"_PLAYER에 변경사항 적용완료!!");
+				
+			}
+			catch(Exception e){
+				System.out.println(e.toString());
+			}
+		}
+		
+		DBconn.close();
+    }
 				
 			
 

@@ -84,6 +84,7 @@ public class Team implements Serializable {
     	return playerList.size();
     }
     
+    //index의 해당하는 보유선수 반환
     public Player getPlayer(int index){
     	try{
     		return playerList.get(index);

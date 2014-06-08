@@ -19,6 +19,8 @@ import data.Team;
 import data.TemporaryTeam;
 import match.data.MPlayer;
 
+import DBCENTER.DBdata;
+
 public class SetStrategy extends JPanel {
 
 	protected Team team;
@@ -29,8 +31,13 @@ public class SetStrategy extends JPanel {
 	JSlider sliderD;
 	JComboBox<String> Formation;
 	
-	public SetStrategy(Team team){
+	DBdata dbd = new DBdata();
+	String tempid;
+	
+	public SetStrategy(Team team,String id){
 		this.team = team;
+		this.tempid =id;
+		
 		tTeam = new TemporaryTeam(team);
 		setLayout(null);
 		setSize(540, 380);
@@ -194,7 +201,7 @@ public class SetStrategy extends JPanel {
 		
 		if(eleven){
 			tTeam.getData(team);
-			
+			dbd.UpdateUserTeam(team, tempid);
 		}
 		
 	}	
