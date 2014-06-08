@@ -48,7 +48,7 @@ public class EditStrategy extends SetStrategy {
 		boolean eleven = true;
 		
 		for(int i = 0; i < 11; i++){
-			if(tTeam.player[i].name == null){
+			if(tTeam.player[i].name.equals("")){
 				eleven = false;
 			}
 		}

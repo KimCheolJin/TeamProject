@@ -131,11 +131,12 @@ public class Training extends JPanel {
 		playerPanel.setVisible(true);
 	}
 
+	//선수 버튼 클릭했을시의 반응
 	private class BtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < player.length; i++) {
 				if (e.getSource() == player[i])
-					if(tTeam.player[i].name != null)
+					if(!tTeam.player[i].name.equals(""))
 						p = tTeam.player[i];
 			}
 			setPlayerInfo();

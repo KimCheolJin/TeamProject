@@ -42,7 +42,7 @@ public class StoreUp extends JPanel {
 		this.setLayout(null);
 		
 		//설정 사용자의 선수목록 보여줌
-		String[] ss= data.getTeam().printPlayer();
+		String[] ss = data.getTeam().printPlayer();
 		length = data.getTeam().player.length; //소유중인 선수목록 길이 최대 22
 		
 		//선수목록부분

@@ -12,7 +12,7 @@ import match.data.Ball;
 import match.data.MPlayer;
 import match.data.MTeam;
 
-public class Stadium extends JPanel implements MouseListener {
+public class Stadium extends JPanel {
 
 	MTeam home;
 	MTeam away;
@@ -23,7 +23,6 @@ public class Stadium extends JPanel implements MouseListener {
 		setBackground(new Color(0,200,0));
 		this.home = home;
 		this.away = away;
-		this.addMouseListener(this);
 	}
 
 	
@@ -92,35 +91,4 @@ public class Stadium extends JPanel implements MouseListener {
 		g.fillOval((int) p.eyeX - 5, (int) p.eyeY - 5, 10, 10);
 	}
 
-
-	public void mouseClicked(MouseEvent e) { }
-	public void mousePressed(MouseEvent e) {
-		ball.player = null;
-		ball.leftAtk = 1;
-		ball.H = 0.01;
-		
-		if(e.getX() - ball.X > 0)
-			ball.vX = Math.sqrt(e.getX() - ball.X) * 0.45;
-		else
-			ball.vX = -Math.sqrt(ball.X - e.getX()) * 0.45;
-		if(e.getY() - ball.Y > 0)
-			ball.vY = Math.sqrt(e.getY() - ball.Y) * 0.45;
-		else
-			ball.vY = -Math.sqrt(ball.Y - e.getY()) * 0.45;
-		
-		if(ball.vX > 0)
-			ball.vH = ball.vX / 12;
-		if(ball.vX < 0)
-			ball.vH = - ball.vX / 12;
-		if(ball.vY > 0)
-			if(ball.vH < ball.vY / 12)
-				ball.vH = ball.vY / 12;
-		if(ball.vY < 0)
-			if(ball.vH < -ball.vY / 12)
-				ball.vH = -ball.vY / 12;
-	}
-	
-	public void mouseReleased(MouseEvent e) { }
-	public void mouseEntered(MouseEvent e) { }
-	public void mouseExited(MouseEvent e) { }
 }
