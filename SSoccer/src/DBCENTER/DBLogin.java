@@ -315,6 +315,7 @@ public class DBLogin {
 				int sst=0;
 
 				System.out.println("회원ID,PW검색시작!!");
+				
 				while (rs.next()) {
 					
 					tempid[i] = rs.getString(2);
@@ -323,7 +324,8 @@ public class DBLogin {
 
 				}
 				
-				for(int k=0; k<50; k++){
+				
+				for(int k=0; k<i; k++){
 					
 					if(tempid[k].equals(uid) && temppw[k].equals(upw)){
 						apt++;
@@ -333,7 +335,7 @@ public class DBLogin {
 					}
 				}
 				
-				if (apt>=1) {
+				if (apt==1) {
 					// ID, PW 모두 확인된 경우
 					System.out.println("로그인허가!!");
 					return 0;
@@ -347,7 +349,6 @@ public class DBLogin {
 					return 2;
 				}
 				
-				psmt.close();
 			} catch (Exception e) {
 				System.out.println(e.toString());
 				// ID,PW중 하나라도 입력이 이뤄지지 않은경우
