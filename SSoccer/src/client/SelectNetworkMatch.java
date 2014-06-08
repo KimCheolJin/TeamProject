@@ -18,9 +18,9 @@ public class SelectNetworkMatch extends SelectMatch {
 		this.mainmenu = mainmenu;
 	}
 
-	public void practicePerformed() {
+	public void networkMatch(boolean special) {
 		try {
-			mainmenu.fg = null;
+			mainmenu.exitFriend();
 			
 			mainmenu.bw.write("");
 			mainmenu.bw.newLine();
@@ -40,9 +40,6 @@ public class SelectNetworkMatch extends SelectMatch {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void specialPerformed() {
 	}
 
 }

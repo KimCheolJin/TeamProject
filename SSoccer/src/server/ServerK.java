@@ -102,6 +102,7 @@ public class ServerK extends JFrame implements Runnable {
 				}
 			} catch (IOException e) {
 				accept[i] = 0;
+				ID[i] = "";
 			}
 		}
 	}
@@ -117,12 +118,13 @@ public class ServerK extends JFrame implements Runnable {
 			jta.setText("");
 			int player1 = -1, player2 = -1;
 			for(int i = 0; i < 64; i++){
-				if(accept[i] == 1) {
+				if(accept[i] != 0) {
 					jta.append(ID[i] + "\n");
-				} else if(accept[i] == 2) {
-					if(player1 == -1){
-						player1 = i;
-					} else player2 = i;
+					if(accept[i] == 2) {
+						if(player1 == -1){
+							player1 = i;
+						} else player2 = i;
+					}
 				}
 			}
 			

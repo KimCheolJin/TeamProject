@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import match.main.AIMode;
 import data.Load;
@@ -28,16 +30,22 @@ public class SelectMatch extends JPanel implements ActionListener {
 		setLayout(null);
 		setSize(540, 380);
 		
-		aimode.setBounds(200, 50, 130, 50);
-		aimode.addActionListener(this);
-		add(aimode);
-		practice.setBounds(200, 150, 130, 50);
-		practice.addActionListener(this);
-		add(practice);
-		specialMatch.setBounds(200, 250, 130, 50);
+		specialMatch.setBounds(100, 50, 130, 50);
 		specialMatch.addActionListener(this);
 		add(specialMatch);
-		
+		practice.setBounds(100, 150, 130, 50);
+		practice.addActionListener(this);
+		add(practice);
+		aimode.setBounds(100, 250, 130, 50);
+		aimode.addActionListener(this);
+		add(aimode);
+		JTextField record = new JTextField();
+		record.setBounds(310, 50, 130, 50);
+		record.setEditable(false);
+		record.setText(data.getUser().win + "/" + 
+				data.getUser().lose + "  " + data.getUser().draw + "¹«");
+		record.setFont(new Font(record.getFont().getName(), 0, 50));
+		add(record);
 		add(new bg());
 	}
 	
@@ -55,16 +63,12 @@ public class SelectMatch extends JPanel implements ActionListener {
 		if (e.getSource() == aimode){
 			new AIMode(data.getTeam(),data.getTeam());
 		} else if (e.getSource() == practice) {
-			practicePerformed();
+			networkMatch(false);
 		} else if (e.getSource() == specialMatch) {
-			specialPerformed();
+			networkMatch(true);
 		}
 	}
 	
-	public void practicePerformed() { 
-		System.out.println("Asd");
-	}
-	
-	public void specialPerformed() { }
+	public void networkMatch(boolean special){}
 
 }

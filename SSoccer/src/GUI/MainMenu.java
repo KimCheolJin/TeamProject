@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import client.FriendGUI;
 import match.data.MTeam;
 import data.Player;
 import data.Team;
@@ -19,7 +20,7 @@ public class MainMenu extends JFrame {
 
 	protected Image img;
 	protected SelectMatch sm;
-	protected JTabbedPane tp;
+	public JTabbedPane tp;
 	protected SetStrategy ss;
 	protected Training tr;
 	
