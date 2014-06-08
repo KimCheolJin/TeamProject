@@ -305,26 +305,46 @@ public class DBLogin {
 
 				ResultSet rs = null;
 				rs = psmt.executeQuery();
+				
+				//50으로 총 회원수 제한
+				String[] tempid = new String[50];
+				String[] temppw = new String[50];
+				
+				int i=0;
+				int apt=0;
+				int sst=0;
 
 				System.out.println("회원ID,PW검색시작!!");
 				while (rs.next()) {
 					
-					String tempid = rs.getString(2);
-					String temppw = rs.getString(3);
+					tempid[i] = rs.getString(2);
+					temppw[i] = rs.getString(3);
+					i++;
 
-					if (tempid.equals(uid) && temppw.equals(upw)) {
-						// ID, PW 모두 확인된 경우
-						System.out.println("로그인허가!!");
-						return 0;
-					} else if (tempid.equals(uid) && (!temppw.equals(upw))) {
-						// ID만 일치하고 PW는 다른경우
-						System.out.println("비밀번호오류!!");
-						return 1;
-					} else {
-						// 둘다 다른경우
-						System.out.println("입력정보오류!!");
-						return 2;
+				}
+				
+				for(int k=0; k<50; k++){
+					
+					if(tempid[k].equals(uid) && temppw[k].equals(upw)){
+						apt++;
 					}
+					else if(tempid[k].equals(uid) && (!temppw[k].equals(upw))){
+						sst++;
+					}
+				}
+				
+				if (apt>=1) {
+					// ID, PW 모두 확인된 경우
+					System.out.println("로그인허가!!");
+					return 0;
+				} else if (sst>=1) {
+					// ID만 일치하고 PW는 다른경우
+					System.out.println("비밀번호오류!!");
+					return 1;
+				} else {
+					// 둘다 다른경우
+					System.out.println("입력정보오류!!");
+					return 2;
 				}
 				
 				psmt.close();

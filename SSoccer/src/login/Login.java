@@ -172,8 +172,8 @@ public class Login extends javax.swing.JFrame {
     	 if(checkNumber == 0){
  
     		//로그인성공시 메인메뉴로 넘어감
-    		m = new ClientK(uid); //현재 에러발생부분
-    		this.setVisible(false);//현재 로그인창 닫음   	    
+    		this.setVisible(false); //현재 로그인창 닫음
+    		m = new ClientK(uid);    	    
     		 
     	 }
     	 else if(checkNumber == 1){

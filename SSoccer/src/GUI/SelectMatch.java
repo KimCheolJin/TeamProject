@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import match.main.AIMode;
 import data.Load;
+import data.AIdata;
 
 public class SelectMatch extends JPanel implements ActionListener {
 
@@ -23,6 +24,8 @@ public class SelectMatch extends JPanel implements ActionListener {
 	protected JButton aimode = new JButton("AI 대전");
 	protected JButton practice = new JButton("연습 경기");
 	protected JButton specialMatch = new JButton("스페셜 메치");
+	
+	AIdata aid = new AIdata();
 	
 	
 	public SelectMatch(Load data, MainMenu mainmenu) {
@@ -62,7 +65,7 @@ public class SelectMatch extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == aimode){
-			new AIMode(data.getTeam(),data.getTeam());
+			new AIMode(data.getTeam(),aid.getTeam(data));//data.getTeam(),data.getTeam()
 			mainmenu.dispose();
 		} else if (e.getSource() == practice) {
 			networkMatch(false);
