@@ -320,18 +320,18 @@ public class DBload {
 						
 						//수정이필요함
 						System.out.println("로드2실행중---"+i);
-						int primaryNum = rs2.getInt(1);
-						String pname = rs2.getString(2);
-						int shoot = rs2.getInt(3);
-						int dribble = rs2.getInt(4);
-						int pass = rs2.getInt(5);
-						int stamina = rs2.getInt(6);
-						int tackle = rs2.getInt(7);
-						int steal = rs2.getInt(8);
-						int speed = rs2.getInt(9);
-						int gk = rs2.getInt(10);
-						int price = rs2.getInt(11);
-						int exp = rs2.getInt(12);
+						int primaryNum = rs2.getInt(2);
+						String pname = rs2.getString(3);
+						int shoot = rs2.getInt(4);
+						int dribble = rs2.getInt(5);
+						int pass = rs2.getInt(6);
+						int stamina = rs2.getInt(7);
+						int tackle = rs2.getInt(8);
+						int steal = rs2.getInt(9);
+						int speed = rs2.getInt(10);
+						int gk = rs2.getInt(11);
+						int price = rs2.getInt(12);
+						int exp = rs2.getInt(13);
 						
 
 						st.addoldPlayer(primaryNum, pname, shoot, dribble, pass, stamina,

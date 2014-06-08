@@ -288,10 +288,10 @@ public class DBdata {
 				
 				for(int i=0; i<t.playerList.size(); i++){
 					
-					sql = "UPDATE "+id+"_PLAYER"
-							+ "SET SHOOT = ?, DRIBBLE=?, PASS=?, STAMINA=?,"
-							+ "TACKLE=?, STEAL=?, SPEED=?, GK=?"
-							+ "WHERE PNUM = ?";
+					sql = "UPDATE "+id+"_PLAYER "
+							+ " SET SHOOT = ?, DRIBBLE=?, PASS=?, STAMINA=?,"
+							+ " TACKLE=?, STEAL=?, SPEED=?, GK=?"
+							+ " WHERE PNUM = ?";
 					
 					PreparedStatement psmt = conn.prepareStatement(sql);
 					
