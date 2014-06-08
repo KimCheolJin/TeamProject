@@ -135,8 +135,8 @@ public class FriendGUI extends JPanel implements Runnable {
 				offAir = new ArrayList<String>();
 				onAir = new ArrayList<String>();
 				onMatch = new ArrayList<String>();
-				for(int i = 0; i < data.getFriend().getFriendList().size(); i++){
-					bw.write(data.getFriend().getFriendList().get(i));
+				for(int i = 0; i < data.getFriend().getFriends().size(); i++){
+					bw.write(data.getFriend().getFriends().get(i).getFriendId());
 					bw.newLine();
 					bw.flush();
 					data.getFriend().getAcceptList().set(i, br.read());
