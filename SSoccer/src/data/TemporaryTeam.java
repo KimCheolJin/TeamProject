@@ -41,8 +41,11 @@ public class TemporaryTeam implements Serializable {
 	}
 	
 	public void getData(Team team){
+		team.playerList.clear();
 		for(int i = 0; i < 22; i++){
 			team.player[i].copy(player[i]);;
+			if(player[i].name.equals(""))
+				team.playerList.add(player[i]);
 		}
 		team.strategyA = strategyA;
 		team.strategyD = strategyD;

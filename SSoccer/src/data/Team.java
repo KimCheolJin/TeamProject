@@ -48,7 +48,6 @@ public class Team implements Serializable {
     }
     
     public void setPlayer() {
-    	playerList.size();
     	for(int i = 0; i < playerList.size(); i++){
     		player[i] = playerList.get(i);
     	}
