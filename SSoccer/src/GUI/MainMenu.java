@@ -1,8 +1,8 @@
 package GUI;
 
+
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -43,9 +43,8 @@ public class MainMenu extends JFrame {
 	}
 	
 	protected void setCompo(){		
-		Image img = new ImageIcon("res/menu/Background.png").getImage();
 		tp = new JTabbedPane();
-		sm = new SelectMatch(img, data, this);
+		sm = new SelectMatch(data, this);
 		ss = new SetStrategy(data.getTeam());
 		tr = new Training(data.getTeam());
 		sn = new StoreNew(data);

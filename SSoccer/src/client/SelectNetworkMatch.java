@@ -1,11 +1,10 @@
 package client;
 
-import java.awt.Image;
+
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 
-import match.main.Client;
-import match.main.Server;
 import data.Load;
 import GUI.SelectMatch;
 
@@ -13,30 +12,24 @@ public class SelectNetworkMatch extends SelectMatch {
 
 	private ClientK mainmenu;
 
-	public SelectNetworkMatch(Image img, Load data, ClientK mainmenu) {
-		super(img, data, mainmenu);
+	private BufferedWriter bw;
+	
+	public SelectNetworkMatch(Load data, ClientK mainmenu) {
+		super(data, mainmenu);
 		this.mainmenu = mainmenu;
 	}
 
-	public void networkMatch(boolean special) {
+	public void networkMatch(boolean isReturn) {
 		try {
-			mainmenu.exitFriend();
+			bw = mainmenu.bw2;
 			
-			mainmenu.bw.write("");
-			mainmenu.bw.newLine();
-			mainmenu.bw.flush();
+			bw.write("select");
+			bw.newLine();
+			bw.flush();
 			
-			mainmenu.bw.write(InetAddress.getLocalHost().getHostAddress());
-			mainmenu.bw.newLine();
-			mainmenu.bw.flush();
-
-			String matchIP = mainmenu.br.readLine();
-			matchIP = mainmenu.br.readLine();
-			System.out.println(matchIP);
-			if (matchIP.equals("0"))
-				new Server(data.getTeam());
-			else
-				new Client(data.getTeam(), matchIP);
+			bw.write(InetAddress.getLocalHost().getHostAddress());
+			bw.newLine();
+			bw.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,6 @@
 package server;
 
+
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -19,10 +21,13 @@ public class ServerK extends JFrame implements Runnable {
 	public JScrollPane jsp = new JScrollPane(jta);
 
 	ServerSocket ss = null;
-	Socket so[] = new Socket[64];
-	BufferedWriter bw[] = new BufferedWriter[64];
-	BufferedReader br[] = new BufferedReader[64];
-	int accept[] = new int[65]; // 0:비접속, 1:접속, 2:시합중
+	Socket so;
+	BufferedWriter bw1[] = new BufferedWriter[64];
+	BufferedReader br1[] = new BufferedReader[64];
+	BufferedWriter bw2[] = new BufferedWriter[64];
+	BufferedReader br2[] = new BufferedReader[64];
+	
+	int accept[] = new int[65]; // 0:비접속, 1:접속, 2:시합 찾는중, 3:시합중
 	String ID[] = new String[64];
 	
 	String matchIP;
@@ -55,8 +60,10 @@ public class ServerK extends JFrame implements Runnable {
 				if(accept[i] == 0) break;
 			}
 			if(i < 64){
-				so[i] = ss.accept();
-				new Thread(new ServerThread(so[i], i)).start();
+				so = ss.accept();
+				new Thread(new FriendThread(so, i)).start();
+				so = ss.accept();
+				new Thread(new MatchThread(so, i)).start();
 				accept[i] = 1;
 			} else {
 				Thread.sleep(1000);
@@ -68,16 +75,17 @@ public class ServerK extends JFrame implements Runnable {
 		}
 	}
 	
-	class ServerThread implements Runnable {
-		int i;
+	class FriendThread implements Runnable {
 		
-		ServerThread(Socket so, int i){
+		private int i;
+		
+		FriendThread(Socket so, int i){
 			this.i = i;
 			try{
-				bw[i] = new BufferedWriter(new OutputStreamWriter(
-						so.getOutputStream()));
-				br[i] = new BufferedReader(new InputStreamReader(
+				br1[i] = new BufferedReader(new InputStreamReader(
 						so.getInputStream()));
+				bw1[i] = new BufferedWriter(new OutputStreamWriter(
+						so.getOutputStream()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
@@ -85,21 +93,59 @@ public class ServerK extends JFrame implements Runnable {
 		
 		public void run(){	
 			try {
-				ID[i] = br[i].readLine();
+				ID[i] = br1[i].readLine();
 				int j;
-				while (true) {
-					String line = br[i].readLine();
-					if(line.equals("")){
-						matchIP = br[i].readLine();
-						accept[i] = 2;
-					} else {
-						for(j = 0; j < 64; j++){
-							if(line.equals(ID[j])) break;
-						}
-						bw[i].write(accept[j]);
-						bw[i].flush();
-					}
+				String line;
+				while (true) {						
+					line = br1[i].readLine();
+					for(j = 0; j < 64; j++)
+						if(line.equals(ID[j])) break;
+					bw1[i].write(accept[j]);
+					bw1[i].flush();
 				}
+			} catch (IOException e) {
+				accept[i] = 0;
+				ID[i] = "";
+			}
+		}
+	}
+
+	class MatchThread implements Runnable {
+
+		private int i;
+
+		public MatchThread(Socket so, int i) {
+			this.i = i;
+			try{
+				br2[i] = new BufferedReader(new InputStreamReader(
+						so.getInputStream()));
+				bw2[i] = new BufferedWriter(new OutputStreamWriter(
+						so.getOutputStream()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+		}
+
+		public void run(){	
+			try {
+				String line = br2[i].readLine();
+				if(line.equals("select")){
+					matchIP = br2[i].readLine();
+					accept[i] = 2;
+				} else if(line.equals("friend")) {
+					line = br2[i].readLine();	//ID를 전송받음.
+					int j;
+					
+					for(j = 0; j < 64; j++)	//ID에 맞는 친구를 검색.
+						if(line.equals(ID[j])) break;
+					
+					line = br2[i].readLine();	//IP를 전송받음
+					bw2[j].newLine();
+					bw2[j].write(line);	//친구에게 IP 전송
+					bw2[j].newLine();
+					bw2[j].flush();
+			    }
+				accept[i] = 2;
 			} catch (IOException e) {
 				accept[i] = 0;
 				ID[i] = "";
@@ -130,14 +176,17 @@ public class ServerK extends JFrame implements Runnable {
 			
 			if(player1 != -1 && player2 != -1) {
 				try {
-					bw[player1].newLine();
-					bw[player1].write("0");
-					bw[player1].newLine();
-					bw[player1].flush();
-					bw[player2].newLine();
-					bw[player2].write(matchIP);
-					bw[player2].newLine();
-					bw[player2].flush();
+					bw2[player1].newLine();
+					bw2[player1].write("0");
+					bw2[player1].newLine();
+					bw2[player1].flush();
+					accept[player1] = 3;
+					
+					bw2[player2].newLine();
+					bw2[player2].write(matchIP);
+					bw2[player2].newLine();
+					bw2[player2].flush();
+					accept[player2] = 3;
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -1,11 +1,13 @@
 package GUI;
 
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -23,8 +25,7 @@ public class SelectMatch extends JPanel implements ActionListener {
 	protected JButton specialMatch = new JButton("½ºÆä¼È ¸ÞÄ¡");
 	
 	
-	public SelectMatch(Image img, Load data, MainMenu mainmenu) {
-		this.img = img;
+	public SelectMatch(Load data, MainMenu mainmenu) {
 		this.data = data;
 		this.mainmenu = mainmenu;
 		setLayout(null);
@@ -54,21 +55,22 @@ public class SelectMatch extends JPanel implements ActionListener {
 			setBounds(0,0,540,380);
 		}
 		public void paint(Graphics g) {
+			img = new ImageIcon("res/menu/Background.png").getImage();
 			g.drawImage(img, 0, 0, 540, 380, this);
 		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == aimode){
-			new AIMode(data.getTeam(),data.getTeam());s
+			new AIMode(data.getTeam(),data.getTeam());
+			mainmenu.dispose();
 		} else if (e.getSource() == practice) {
 			networkMatch(false);
 		} else if (e.getSource() == specialMatch) {
 			networkMatch(true);
 		}
-		mainmenu.dispose();
 	}
 	
-	public void networkMatch(boolean special){}
+	public void networkMatch(boolean isReturn){}
 
 }
