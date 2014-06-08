@@ -123,6 +123,7 @@ public class StoreNew extends JPanel {
 						else{
 							data.buyNewPlayer(selectedIndex);
 							Massage ms = new Massage("영입완료!!");
+							
 						}
 						
 					}

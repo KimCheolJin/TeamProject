@@ -213,7 +213,9 @@ public class DBload {
 				
 				while(rs.next()){
 					
+					//win, draw, lose, score1, score2 받도록 수정
 					String temp = rs.getString(2);
+					
 					
 					String sql2 = "SELECT UUNAME FROM UUSER WHERE = ?";
 					
