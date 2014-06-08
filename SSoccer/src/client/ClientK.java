@@ -66,7 +66,7 @@ public class ClientK extends MainMenu {
 	}
 	
 	public static void main(String args[]){
-		String id = "qwe";
+		String id = "asd";
 		new ClientK(id);
 	}
 	

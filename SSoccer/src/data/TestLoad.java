@@ -58,10 +58,9 @@ public class TestLoad extends Load {
 	
 	public Friend makeFriend(){
 		Friend friend = new Friend();
-		//잠시오류나서 주석처리했습니다
-		//friend.addFriend("asd", "ASD");
-		//friend.addFriend("qwe", "QWE");
-		//friend.addFriend("zxc", "ZXC");
+		friend.addFriend("asd", "ASD", 3, 2, 1, 5, 5);
+		friend.addFriend("qwe", "QWE", 5, 5, 3, 12, 21);
+		friend.addFriend("zxc", "ZXC", 0, 0, 10, 0, 0);
 		return friend;
 	}
 	

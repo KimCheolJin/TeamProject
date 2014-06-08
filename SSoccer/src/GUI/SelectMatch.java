@@ -59,7 +59,6 @@ public class SelectMatch extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		mainmenu.dispose();
 		if (e.getSource() == aimode){
 			new AIMode(data.getTeam(),data.getTeam());
 		} else if (e.getSource() == practice) {
@@ -67,6 +66,7 @@ public class SelectMatch extends JPanel implements ActionListener {
 		} else if (e.getSource() == specialMatch) {
 			networkMatch(true);
 		}
+		mainmenu.dispose();
 	}
 	
 	public void networkMatch(boolean special){}
