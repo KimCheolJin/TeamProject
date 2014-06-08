@@ -34,18 +34,10 @@ public class SetStrategy extends JPanel {
 	DBdata dbd = new DBdata();
 	String tempid;
 	
-	public SetStrategy(Team team,String id){
-		this.team = team;
+	public SetStrategy(Team team, String id){
+		this(team);
 		this.tempid =id;
 		
-		tTeam = new TemporaryTeam(team);
-		setLayout(null);
-		setSize(540, 380);
-		setStrategyPanel(0, 55);
-		setChangePanel(200, 0);
-		setFomation(0, 15);
-		setOkCancel();
-		draw();
 	}
 	
 	public SetStrategy(Team team){
@@ -201,7 +193,6 @@ public class SetStrategy extends JPanel {
 				player[i].setBackground(new Color(200, 200, 200));
 		}
 	}
-
 
 	protected void okPerformed() {
 		boolean eleven = true;

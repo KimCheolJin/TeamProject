@@ -1,6 +1,7 @@
 package GUI;
 
 
+
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -28,8 +29,8 @@ public class MainMenu extends JFrame {
 	public MainMenu(String id){
 		
 		//시작시 로드 한번 일어남
-		data = new Load(id);
-		//data = new TestLoad(id);
+		//data = new Load(id);
+		data = new TestLoad(id);
 		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
@@ -45,7 +46,7 @@ public class MainMenu extends JFrame {
 	protected void setCompo(String id){		
 		tp = new JTabbedPane();
 		sm = new SelectMatch(data, this);
-		ss = new SetStrategy(data.getTeam(),id);
+		ss = new SetStrategy(data.getTeam(), id);
 		tr = new Training(data.getTeam(), id);
 		sn = new StoreNew(data);
 		so = new StoreOld(data);

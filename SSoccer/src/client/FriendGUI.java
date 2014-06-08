@@ -1,5 +1,6 @@
 package client;
 
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -168,6 +169,8 @@ public class FriendGUI extends JPanel implements Runnable,
 		game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					clientK.pause();
+					
 					clientK.bw2.write("friend");
 					clientK.bw2.newLine();
 					clientK.bw2.flush();
@@ -180,7 +183,7 @@ public class FriendGUI extends JPanel implements Runnable,
 					clientK.bw2.newLine();
 					clientK.bw2.flush();
 					
-					new Server(data.getTeam());
+					new Server(data.getTeam(), true);
 					
 					clientK.dispose();
 				} catch (IOException e1) {
@@ -221,7 +224,7 @@ public class FriendGUI extends JPanel implements Runnable,
 								.getFriendNick());
 						onAirID.add(data.getFriend().getFriends().get(i)
 								.getFriendId());
-					} else if (accept == 2 || accept == 3) {
+					} else if (accept > 1) {
 						onMatch.add(data.getFriend().getFriends().get(i)
 								.getFriendNick());
 						onMatchID.add(data.getFriend().getFriends().get(i)

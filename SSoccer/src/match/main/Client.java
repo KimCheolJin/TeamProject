@@ -1,5 +1,6 @@
 package match.main;
 
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class Client  {
 
 	Socket so;
 	
-	public Client(Team team, String ip) {
+	public Client(Team team, String ip, boolean isReturn) {
 		try {
 			MTeam away = new MTeam(team);
 			

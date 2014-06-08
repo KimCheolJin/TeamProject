@@ -1,6 +1,7 @@
 package server;
 
 
+
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,7 +28,7 @@ public class ServerK extends JFrame implements Runnable {
 	BufferedWriter bw2[] = new BufferedWriter[64];
 	BufferedReader br2[] = new BufferedReader[64];
 	
-	int accept[] = new int[65]; // 0:비접속, 1:접속, 2:시합 찾는중, 3:시합중
+	int accept[] = new int[65]; // 0:비접속, 1:접속, 2:일반시합 찾는중, 3:랭크시합 찾는중, 4:시합중
 	String ID[] = new String[64];
 	
 	String matchIP;
@@ -105,7 +106,7 @@ public class ServerK extends JFrame implements Runnable {
 				}
 			} catch (IOException e) {
 				accept[i] = 0;
-				ID[i] = "";
+				ID[i] = null;
 			}
 		}
 	}
@@ -129,9 +130,12 @@ public class ServerK extends JFrame implements Runnable {
 		public void run(){	
 			try {
 				String line = br2[i].readLine();
-				if(line.equals("select")){
+				if(line.equals("practice")){
 					matchIP = br2[i].readLine();
 					accept[i] = 2;
+				} else if(line.equals("special")){
+					matchIP = br2[i].readLine();
+					accept[i] = 3;
 				} else if(line.equals("friend")) {
 					line = br2[i].readLine();	//ID를 전송받음.
 					int j;
@@ -140,15 +144,16 @@ public class ServerK extends JFrame implements Runnable {
 						if(line.equals(ID[j])) break;
 					
 					line = br2[i].readLine();	//IP를 전송받음
+					bw2[j].write("friend");	//친구에게 IP 전송
 					bw2[j].newLine();
 					bw2[j].write(line);	//친구에게 IP 전송
 					bw2[j].newLine();
 					bw2[j].flush();
+					accept[i] = 4;
 			    }
-				accept[i] = 2;
 			} catch (IOException e) {
 				accept[i] = 0;
-				ID[i] = "";
+				ID[i] = null;
 			}
 		}
 	}
@@ -162,7 +167,7 @@ public class ServerK extends JFrame implements Runnable {
 			}
 			
 			jta.setText("");
-			int player1 = -1, player2 = -1;
+			int player1 = -1, player2 = -1, player3 = -1, player4 = -1;
 			for(int i = 0; i < 64; i++){
 				if(accept[i] != 0) {
 					jta.append(ID[i] + "\n");
@@ -170,23 +175,49 @@ public class ServerK extends JFrame implements Runnable {
 						if(player1 == -1){
 							player1 = i;
 						} else player2 = i;
+					} else if(accept[i] == 3){
+						if(player3 == -1){
+							player3 = i;
+						} else player4 = i;
+						
 					}
 				}
 			}
 			
 			if(player1 != -1 && player2 != -1) {
 				try {
+					bw2[player1].write("practice");
 					bw2[player1].newLine();
 					bw2[player1].write("0");
 					bw2[player1].newLine();
 					bw2[player1].flush();
-					accept[player1] = 3;
+					accept[player1] = 4;
 					
+					bw2[player2].write("practice");
 					bw2[player2].newLine();
 					bw2[player2].write(matchIP);
 					bw2[player2].newLine();
 					bw2[player2].flush();
-					accept[player2] = 3;
+					accept[player2] = 4;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(player3 != -1 && player4 != -1) {
+				try {
+					bw2[player3].write("special");
+					bw2[player3].newLine();
+					bw2[player3].write("0");
+					bw2[player3].newLine();
+					bw2[player3].flush();
+					accept[player3] = 4;
+					
+					bw2[player4].write("special");
+					bw2[player4].newLine();
+					bw2[player4].write(matchIP);
+					bw2[player4].newLine();
+					bw2[player4].flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

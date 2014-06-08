@@ -1,5 +1,6 @@
 package match.main;
 
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import match.graphic.GraphicMain;
 
 public class Server {
 	
-	public Server(Team team){
+	public Server(Team team, boolean isReturn){
 		try {
 			MTeam home = new MTeam(team);
 			

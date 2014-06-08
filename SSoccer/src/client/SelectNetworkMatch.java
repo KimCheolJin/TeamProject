@@ -1,6 +1,7 @@
 package client;
 
 
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -21,9 +22,13 @@ public class SelectNetworkMatch extends SelectMatch {
 
 	public void networkMatch(boolean isReturn) {
 		try {
+			mainmenu.pause();
+
 			bw = mainmenu.bw2;
-			
-			bw.write("select");
+			if(isReturn)
+				bw.write("special");				
+			else
+				bw.write("practice");
 			bw.newLine();
 			bw.flush();
 			

@@ -1,6 +1,7 @@
 package client;
 
 
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import match.main.Client;
@@ -42,8 +44,8 @@ public class ClientK extends MainMenu {
 	protected void setCompo(String id){		
 		tp = new JTabbedPane();
 		sm = new SelectNetworkMatch(data, this);
-		ss = new SetStrategy(data.getTeam(),id);
-		tr = new Training(data.getTeam(),id);
+		ss = new SetStrategy(data.getTeam(), id);
+		tr = new Training(data.getTeam(), id);
 		sn = new StoreNew(data);
 		so = new StoreOld(data);
 		su = new StoreUp(data);
@@ -69,19 +71,31 @@ public class ClientK extends MainMenu {
 	
 	private void startMatch(){
 		try {
-			
+			String kindOfMatch = br2.readLine();
 			String matchIP = br2.readLine();
-			matchIP = br2.readLine();
-			if (matchIP.equals("0"))
-				new Server(data.getTeam());
-			else
-				new Client(data.getTeam(), matchIP);	
+			if(kindOfMatch.equals("friend")){
+				new Client(data.getTeam(), matchIP, true);	
+			}
+			else {
+				boolean isReturn = false;
+				if(kindOfMatch.equals("special"))
+					isReturn = true;
+				System.out.println(isReturn);
+				if (matchIP.equals("0"))
+					new Server(data.getTeam(), isReturn);
+				else
+					new Client(data.getTeam(), matchIP, isReturn);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		dispose();
 	}
 	
+	public void pause() {
+		remove(tp);
+	}
+
 	public static void main(String args[]){
 		String id = "asd";
 		new ClientK(id);
