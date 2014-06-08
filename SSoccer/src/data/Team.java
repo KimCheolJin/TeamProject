@@ -48,7 +48,7 @@ public class Team implements Serializable {
     }
     
     public void setPlayer() {
-    	playerList.size();
+    	
     	for(int i = 0; i < playerList.size(); i++){
     		player[i] = playerList.get(i);
     	}
@@ -58,8 +58,9 @@ public class Team implements Serializable {
     }
     
     public String[]	printPlayer(){
-    	String[] temp = new String[22];
-    	for(int i=0; i<22; i++){
+    	
+    	String[] temp = new String[playerList.size()];
+    	for(int i=0; i<playerList.size(); i++){
     		temp[i] = player[i].toString();
     	}
     	return temp;
