@@ -67,12 +67,11 @@ public class SelectMatch extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == aimode){
-<<<<<<< HEAD
-			new AIMode(data.getTeam(),aid.getTeam(data));//data.getTeam(),data.getTeam()
+			
 			mainmenu.dispose();
-=======
+
 			aiMatch();
->>>>>>> 1237c517e0d0c3293cc373f836adb94bd43bac96
+
 		} else if (e.getSource() == practice) {
 			networkMatch(false);
 		} else if (e.getSource() == specialMatch) {
