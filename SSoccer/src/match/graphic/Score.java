@@ -14,7 +14,7 @@ public class Score extends JPanel {
 	JLabel time;
 	MTeam home;
 	MTeam away;
-	int t;
+	public int t;
 	
 	public Score(MTeam home, MTeam away) {
 		setLayout(new BorderLayout());

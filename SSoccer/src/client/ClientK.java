@@ -32,6 +32,7 @@ public class ClientK extends MainMenu implements Runnable {
 	public BufferedWriter bw2;
 	public BufferedReader br2;
 
+	String kindOfMatch;
 	
 	public ClientK(String id) {
 		super(id);
@@ -72,29 +73,44 @@ public class ClientK extends MainMenu implements Runnable {
 	
 	public void run(){
 		try {
-			String kindOfMatch = br2.readLine();
+			kindOfMatch = br2.readLine();
 			String matchIP = br2.readLine();
 			if(kindOfMatch.equals("friend")){
-				new Client(data.getTeam(), matchIP, true);	
+				new Client(data.getTeam(), matchIP, this);	
 			}
 			else {
-				boolean isReturn = false;
-				if(kindOfMatch.equals("special"))
-					isReturn = true;
-				System.out.println(isReturn);
 				if (matchIP.equals("0"))
-					new Server(data.getTeam(), isReturn);
+					new Server(data.getTeam(), this);
 				else
-					new Client(data.getTeam(), matchIP, isReturn);
+					new Client(data.getTeam(), matchIP, this);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		dispose();
+		setVisible(false);
 	}
 	
 	public void pause() {
-		remove(tp);
+		tp.setVisible(false);
+	}
+
+	public void restartClient(int score1, int score2) {
+		setVisible(true);
+		tp.setVisible(true);
+		try {
+			bw2.write("reaccept");
+			bw2.newLine();
+			bw2.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(kindOfMatch == "friend") {
+			
+		} else if(kindOfMatch == "special") {
+			
+		} 
+		kindOfMatch = null;
+		new Thread(this).start();
 	}
 
 	public static void main(String args[]){

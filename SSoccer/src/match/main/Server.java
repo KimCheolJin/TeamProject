@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import client.ClientK;
 import data.Team;
 import match.data.MTeam;
 import match.graphic.EditStrategy;
@@ -16,7 +17,7 @@ import match.graphic.GraphicMain;
 
 public class Server {
 	
-	public Server(Team team, boolean isReturn){
+	public Server(Team team, ClientK clientK){
 		try {
 			MTeam home = new MTeam(team);
 			
@@ -48,9 +49,9 @@ public class Server {
 			ObjectInputStream oism = new ObjectInputStream(bism);
 			
 			GraphicMain gm = new GraphicMain(home, away);
-			new Thread(new ServerThread(gm, oos)).start();
+			new Thread(new ServerThread(gm, oos, clientK)).start();
 			new Thread(new StrategyThread(oism, away, gm)).start();
-			new EditStrategy(home, gm.homeInfo, oosm);
+			gm.editStrategy = new EditStrategy(home, gm.homeInfo, oosm);
 			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();

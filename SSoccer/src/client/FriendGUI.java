@@ -185,7 +185,7 @@ public class FriendGUI extends JPanel implements Runnable,
 					clientK.bw2.newLine();
 					clientK.bw2.flush();
 					
-					new Server(data.getTeam(), true);
+					new Server(data.getTeam(), clientK);
 					
 					clientK.dispose();
 				} catch (IOException e1) {

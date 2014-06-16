@@ -13,6 +13,7 @@ public class GraphicMain extends JFrame {
 	public TeamInfo awayInfo;
 	public Stadium stadium;
 	public Score score;
+	public EditStrategy editStrategy;
 	
 	public GraphicMain(MTeam home, MTeam away){
 		this.home = home;
@@ -55,5 +56,10 @@ public class GraphicMain extends JFrame {
 		awayEmblem.setBounds(920,0,200,200);
 		add(awayEmblem);
 
+	}
+
+	public void close(){
+		editStrategy.editor.dispose();
+		dispose();
 	}
 }
