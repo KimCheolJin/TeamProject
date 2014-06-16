@@ -201,6 +201,8 @@ public class DBdata {
 				psmt.setString(1, friendid);
 				psmt.setString(2, userid);
 				
+				psmt.executeUpdate();
+				
 				
 				//친구 이름 검색후 닉네임 받음
 				sql = "SELECT * FROM UUSER WHERE UUID = ?";
@@ -212,12 +214,14 @@ public class DBdata {
 				ResultSet rs = null;
 				rs = psmt.executeQuery();
 				
-				friendNick = rs.getString(4);
-		
+				while(rs.next()){
 				
+					friendNick = rs.getString(4);
+					
+				}
+		
 				System.out.println("DB로 친구정보 전송완료!!");
 				psmt.close();
-				
 				
 			}
 				

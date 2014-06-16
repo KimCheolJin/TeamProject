@@ -16,7 +16,7 @@ public class AIdata {
 	}
 	
 	//Player형 list로 받음
-	public void setTeam(ArrayList<Player> list ){
+	public void setTeam(ArrayList<Player> list){
 		
 		//0~9랜덤
 		randomNumber = (int)(Math.random()*10);
