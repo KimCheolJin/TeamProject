@@ -152,6 +152,9 @@ public class ServerK extends JFrame implements Runnable {
 						bw2[j].write(line);	//模备俊霸 IP 傈价
 						bw2[j].newLine();
 						bw2[j].flush();
+						bw2[j].write(ID[i]);	//模备俊霸 IP 傈价
+						bw2[j].newLine();
+						bw2[j].flush();
 						accept[i] = 4;
 				    } else if(line.equals("reaccept")) {
 				    	accept[i] = 1;

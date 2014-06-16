@@ -187,6 +187,7 @@ public class FriendGUI extends JPanel implements Runnable,
 					
 					new Server(data.getTeam(), clientK);
 					
+					clientK.friendID = selectedFriend.getFriendId();
 					clientK.dispose();
 				} catch (IOException e1) {
 					e1.printStackTrace();

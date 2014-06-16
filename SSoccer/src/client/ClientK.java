@@ -32,7 +32,8 @@ public class ClientK extends MainMenu implements Runnable {
 	public BufferedWriter bw2;
 	public BufferedReader br2;
 
-	String kindOfMatch;
+	private String kindOfMatch;
+	public String friendID;
 	
 	public ClientK(String id) {
 		super(id);
@@ -76,6 +77,7 @@ public class ClientK extends MainMenu implements Runnable {
 			kindOfMatch = br2.readLine();
 			String matchIP = br2.readLine();
 			if(kindOfMatch.equals("friend")){
+				friendID = br2.readLine();
 				new Client(data.getTeam(), matchIP, this);	
 			}
 			else {

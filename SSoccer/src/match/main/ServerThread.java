@@ -22,7 +22,7 @@ public class ServerThread extends MatchThread {
 	public void run() {
 		super.run();
 		gm.dispose();
-		clientK.restartClient(away.score, home.score);
+		clientK.restartClient(home.score, away.score);
 	}
 
 	public boolean write() {
@@ -33,7 +33,7 @@ public class ServerThread extends MatchThread {
 			oos.reset();
 		} catch (IOException e) {
 			gm.close();
-			clientK.restartClient(away.score, home.score);
+			clientK.restartClient(home.score, away.score);
 			return false;
 		}
 		return true;
