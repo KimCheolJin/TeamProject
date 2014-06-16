@@ -69,6 +69,8 @@ public class FriendGUI extends JPanel implements Runnable,
 		this.data = data;
 		this.clientK = clientK;
 
+		data.upDate();
+		
 		setList();
 		setOther(data.getUser().getUserID());
 
@@ -144,7 +146,7 @@ public class FriendGUI extends JPanel implements Runnable,
 				} else {
 
 					// uuser테이블에 사용자 있음 친구등록 실행
-					dbd.putFriends(id, temp);
+					data.putFriend(id, temp);
 					Massage ms = new Massage("친구등록완료!!");
 				}
 

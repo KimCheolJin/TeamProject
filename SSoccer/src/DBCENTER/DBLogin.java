@@ -129,14 +129,15 @@ public class DBLogin {
 					k=0;
 				}
 				else if(team=="맨시티"){
-					k=22;
+					k=21;
 				}
 				else if(team=="리버풀"){
-					k=44;
+					k=43;
 				}
 				else if(team=="맨유"){
-					k=66;
+					k=65;
 				}
+				
 				
 				
 				//팀에맞는 선수들 id_PLAYER로 전달하는 부분

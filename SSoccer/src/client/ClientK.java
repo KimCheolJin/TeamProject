@@ -21,7 +21,7 @@ import GUI.StoreOld;
 import GUI.StoreUp;
 import GUI.Training;
 
-public class ClientK extends MainMenu {
+public class ClientK extends MainMenu implements Runnable {
 
 	int port = 1112;
 	String IP = "127.0.0.1";
@@ -38,7 +38,8 @@ public class ClientK extends MainMenu {
 		setting();
 		fg = new FriendGUI(data, this);
 		tp.add("친구 목록", fg);
-		startMatch();
+		//startMatch();
+		new Thread(this).start();
 	}
 	
 	protected void setCompo(String id){		
@@ -69,7 +70,7 @@ public class ClientK extends MainMenu {
 		}
 	}
 	
-	private void startMatch(){
+	public void run(){
 		try {
 			String kindOfMatch = br2.readLine();
 			String matchIP = br2.readLine();
