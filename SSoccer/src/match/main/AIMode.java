@@ -1,5 +1,6 @@
 package match.main;
 
+import client.ClientK;
 import match.data.MTeam;
 import match.data.setDLocation;
 import match.graphic.EditStrategy;
@@ -8,7 +9,7 @@ import data.Team;
 
 public class AIMode {
 
-	public AIMode(Team team, Team teamAI) {
+	public AIMode(Team team, Team teamAI, ClientK clientK) {
 		MTeam home = new MTeam(team);
 		MTeam away = new MTeam(teamAI);
 
@@ -16,8 +17,8 @@ public class AIMode {
 		new setDLocation().setAwayTeam(away);
 
 		GraphicMain gm = new GraphicMain(home, away);
-		new Thread(new AIModeThread(gm)).start();
-		new EditStrategy(home, gm.homeInfo);
+		new Thread(new AIModeThread(gm, clientK)).start();
+		gm.editStrategy = new EditStrategy(home, gm.homeInfo);
 	}
 
 }

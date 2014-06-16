@@ -3,6 +3,7 @@ package match.main;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import client.ClientK;
 import match.data.SendingData;
 import match.graphic.GraphicMain;
 
@@ -10,27 +11,32 @@ public class ServerThread extends MatchThread {
 
 	SendingData data = new SendingData();
 	ObjectOutputStream oos;
+	ClientK clientK;
 	
-	public ServerThread(GraphicMain gm, ObjectOutputStream oos){
+	public ServerThread(GraphicMain gm, ObjectOutputStream oos, ClientK clientK){
 		super(gm);
 		this.oos = oos;
+		this.clientK = clientK;
 	}
 	
 	public void run() {
 		super.run();
+		gm.dispose();
+		clientK.restartClient(away.score, home.score);
 	}
 
-	public void write() {
+	public boolean write() {
 		try {
 			data.setData(home, away, ball);
 			oos.writeObject(data);
 			oos.flush();
 			oos.reset();
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
+			gm.close();
+			clientK.restartClient(away.score, home.score);
+			return false;
 		}
-		
+		return true;
 	}
 	
 }

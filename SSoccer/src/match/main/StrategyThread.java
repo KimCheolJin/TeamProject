@@ -29,7 +29,7 @@ public class StrategyThread implements Runnable {
 				if(team.player[0].goalX == 720) new setDLocation().setHomeFomation(team);
 				else new setDLocation().setAwayFomation(team);
 			} catch (ClassNotFoundException | IOException e) {
-				e.printStackTrace();
+				break;
 			}
 			
 		}

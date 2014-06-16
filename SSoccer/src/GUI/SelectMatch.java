@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import client.ClientK;
 import match.main.AIMode;
 import data.Load;
 import data.AIdata;
@@ -19,18 +20,19 @@ import data.AIdata;
 public class SelectMatch extends JPanel implements ActionListener {
 
 	private Image img;
-	protected MainMenu mainmenu;
+	protected ClientK mainmenu;
 	protected Load data;
 	protected JButton aimode = new JButton("AI 대전");
 	protected JButton practice = new JButton("연습 경기");
 	protected JButton specialMatch = new JButton("스페셜 메치");
 	
-	AIdata aid = new AIdata();
+	protected AIdata aid = new AIdata();
 	
 	
 	public SelectMatch(Load data, MainMenu mainmenu) {
 		this.data = data;
-		this.mainmenu = mainmenu;
+		if(mainmenu instanceof ClientK)
+			this.mainmenu = (ClientK) mainmenu;
 		setLayout(null);
 		setSize(540, 380);
 		
@@ -65,8 +67,12 @@ public class SelectMatch extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == aimode){
+<<<<<<< HEAD
 			new AIMode(data.getTeam(),aid.getTeam(data));//data.getTeam(),data.getTeam()
 			mainmenu.dispose();
+=======
+			aiMatch();
+>>>>>>> 1237c517e0d0c3293cc373f836adb94bd43bac96
 		} else if (e.getSource() == practice) {
 			networkMatch(false);
 		} else if (e.getSource() == specialMatch) {
@@ -76,4 +82,8 @@ public class SelectMatch extends JPanel implements ActionListener {
 	
 	public void networkMatch(boolean isReturn){}
 
+	public void aiMatch(){
+		new AIMode(data.getTeam(), aid.getTeam(data), mainmenu);
+		mainmenu.setVisible(false);
+	}
 }

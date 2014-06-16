@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import client.ClientK;
 import data.Team;
 import match.data.MTeam;
 import match.graphic.EditStrategy;
@@ -17,7 +18,7 @@ public class Client  {
 
 	Socket so;
 	
-	public Client(Team team, String ip, boolean isReturn) {
+	public Client(Team team, String ip, ClientK clientK) {
 		try {
 			MTeam away = new MTeam(team);
 			
@@ -48,9 +49,9 @@ public class Client  {
 			ObjectInputStream oism = new ObjectInputStream(bism);
 			
 			GraphicMain gm = new GraphicMain(home, away);
-			new Thread(new ClientThread(gm, ois)).start();
+			new Thread(new ClientThread(gm, ois, clientK)).start();
 			new Thread(new StrategyThread(oism, home, gm)).start();
-			new EditStrategy(away, gm.awayInfo, oosm);
+			gm.editStrategy = new EditStrategy(away, gm.awayInfo, oosm);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

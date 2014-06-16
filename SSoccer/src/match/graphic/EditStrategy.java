@@ -15,9 +15,10 @@ public class EditStrategy extends SetStrategy {
 	TeamInfo teaminfo;
 	MTeam team;
 	ObjectOutputStream oosm;
-
+	public JFrame editor;
+	
 	//멀티플레이 모드 생성자
-	public EditStrategy(final MTeam team, final TeamInfo teaminfo, final ObjectOutputStream oosm) {
+	public EditStrategy(MTeam team, TeamInfo teaminfo, ObjectOutputStream oosm) {
 		super(team);
 		this.team = team;
 		tTeam = new TemporaryTeam(team);
@@ -36,7 +37,7 @@ public class EditStrategy extends SetStrategy {
 	
 	//JFrame 생성
 	public void setFrame(){
-		JFrame editor = new JFrame(team.name + " Edit");
+		editor = new JFrame(team.name + " Edit");
 		editor.setContentPane(this);
 		editor.setSize(550, 400);
 		editor.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

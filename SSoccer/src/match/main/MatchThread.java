@@ -39,7 +39,10 @@ public class MatchThread implements Runnable {
 					gc -= 1;
 					setPlayerEye();
 				}
-				write();
+				
+				if(gm.score.t > 54000) break;
+				
+				if(!write()) break;
 				fps += 1;
 				gm.stadium.repaint();
 				gm.score.rescore();
@@ -97,7 +100,9 @@ public class MatchThread implements Runnable {
 
 	}
 	
-	public void write(){};
+	public boolean write(){
+		return true;
+	};
 
 	public void move() {
 		for (int i = 0; i < 11; i++) {

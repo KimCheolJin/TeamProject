@@ -128,32 +128,38 @@ public class ServerK extends JFrame implements Runnable {
 		}
 
 		public void run(){	
-			try {
-				String line = br2[i].readLine();
-				if(line.equals("practice")){
-					matchIP = br2[i].readLine();
-					accept[i] = 2;
-				} else if(line.equals("special")){
-					matchIP = br2[i].readLine();
-					accept[i] = 3;
-				} else if(line.equals("friend")) {
-					line = br2[i].readLine();	//ID를 전송받음.
-					int j;
-					
-					for(j = 0; j < 64; j++)	//ID에 맞는 친구를 검색.
-						if(line.equals(ID[j])) break;
-					
-					line = br2[i].readLine();	//IP를 전송받음
-					bw2[j].write("friend");	//친구에게 IP 전송
-					bw2[j].newLine();
-					bw2[j].write(line);	//친구에게 IP 전송
-					bw2[j].newLine();
-					bw2[j].flush();
-					accept[i] = 4;
-			    }
-			} catch (IOException e) {
-				accept[i] = 0;
-				ID[i] = null;
+			while(true) {
+				try {
+					String line = br2[i].readLine();
+					if(line.equals("practice")){
+						matchIP = br2[i].readLine();
+						accept[i] = 2;
+					} else if(line.equals("AImode")){
+						accept[i] = 4;
+					} else if(line.equals("special")){
+						matchIP = br2[i].readLine();
+						accept[i] = 3;
+					} else if(line.equals("friend")) {
+						line = br2[i].readLine();	//ID를 전송받음.
+						int j;
+						
+						for(j = 0; j < 64; j++)	//ID에 맞는 친구를 검색.
+							if(line.equals(ID[j])) break;
+						
+						line = br2[i].readLine();	//IP를 전송받음
+						bw2[j].write("friend");	//친구에게 IP 전송
+						bw2[j].newLine();
+						bw2[j].write(line);	//친구에게 IP 전송
+						bw2[j].newLine();
+						bw2[j].flush();
+						accept[i] = 4;
+				    } else if(line.equals("reaccept")) {
+				    	accept[i] = 1;
+				    }
+				} catch (IOException e) {
+					accept[i] = 0;
+					ID[i] = null;
+				}
 			}
 		}
 	}
@@ -170,7 +176,7 @@ public class ServerK extends JFrame implements Runnable {
 			int player1 = -1, player2 = -1, player3 = -1, player4 = -1;
 			for(int i = 0; i < 64; i++){
 				if(accept[i] != 0) {
-					jta.append(ID[i] + "\n");
+					jta.append(accept[i] + " " + ID[i] + "\n");
 					if(accept[i] == 2) {
 						if(player1 == -1){
 							player1 = i;

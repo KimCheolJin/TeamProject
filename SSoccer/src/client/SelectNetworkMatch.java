@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import match.main.AIMode;
 import data.Load;
 import GUI.SelectMatch;
 
@@ -40,4 +41,15 @@ public class SelectNetworkMatch extends SelectMatch {
 		}
 	}
 
+	public void aiMatch(){
+		new AIMode(data.getTeam(), aid.getTeam(data), mainmenu);
+		try {
+			bw.write("AImode");
+			bw.newLine();
+			bw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		mainmenu.setVisible(false);
+	}
 }

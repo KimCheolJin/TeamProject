@@ -2,6 +2,8 @@ package match.main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+
+import client.ClientK;
 import match.data.Ball;
 import match.data.MTeam;
 import match.data.SendingData;
@@ -14,20 +16,22 @@ public class ClientThread implements Runnable {
 	Ball ball;
 	SendingData data = new SendingData();
 	ObjectInputStream ois;
+	ClientK clientK;
 	private int fps;
 	
-	public ClientThread(GraphicMain gm, ObjectInputStream ois){
+	public ClientThread(GraphicMain gm, ObjectInputStream ois, ClientK clientK){
 		this.gm = gm;
 		home = gm.home;
 		away = gm.away;
 		ball = gm.stadium.ball;
 		this.ois = ois;
+		this.clientK = clientK;
 	}
 	
 	public void run() {
 		new Thread(new Checkfps()).start();
 		while(true){
-			read();
+			if(!read()) break;
 			setPlayerEye();
 			gm.stadium.repaint();
 			gm.score.rescore();
@@ -42,18 +46,18 @@ public class ClientThread implements Runnable {
 		}
 	}
 	
-	public void read() {
+	public boolean read() {
 		try {
 			data = (SendingData) ois.readObject();
 			data.getData(home, away, ball);
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
+			gm.close();
+			clientK.restartClient(away.score, home.score);
+			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.exit(0);
+			
 		}
-		
+		return true;
 	}
 
 	class Checkfps implements Runnable {
