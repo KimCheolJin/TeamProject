@@ -29,8 +29,8 @@ public class MainMenu extends JFrame {
 	public MainMenu(String id){
 		
 		//시작시 로드 한번 일어남
-		//data = new Load(id);
-		data = new TestLoad(id);
+		data = new Load(id);
+		//data = new TestLoad(id);
 		
 		setBounds(300,300,550, 435);
 		setTitle("Soccer Soccer");
