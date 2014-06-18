@@ -224,6 +224,8 @@ public class DBload {
 					int score1 = rs.getInt(6);
 					int score2 = rs.getInt(7);
 					
+					String nick = null; //친구 닉네임받는곳설정
+					
 					
 					String sql2 = "SELECT * FROM UUSER WHERE UUID = ?";
 					
@@ -234,7 +236,12 @@ public class DBload {
 					ResultSet rs2 = null;
 					rs2 = psmt2.executeQuery();
 					
-					String nick = rs2.getString(4);
+					while(rs2.next()){
+						
+						nick = rs2.getString(4);
+						
+					}
+					
 					
 					//id에 맞는 nick가져와서 id,nick을 친구목록에저장
 					f.addFriend(fid,nick,win,draw,lose,score1,score2);

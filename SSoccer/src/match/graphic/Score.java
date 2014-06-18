@@ -37,7 +37,7 @@ public class Score extends JPanel {
 	public void rescore(){
 		score.setText(home.score + " : " + away.score);
 		
-		t += 2;
+		t += 20;
 		String minute = "" + t / 600;
 		if(t / 600 < 10) minute = "0" + minute;
 		String second = "" +  t % 600 / 10;

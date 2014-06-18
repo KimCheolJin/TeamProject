@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 
 import match.main.Client;
 import match.main.Server;
+import DBCENTER.DBdata;
 import GUI.MainMenu;
 import GUI.SetStrategy;
 import GUI.StoreNew;
@@ -34,9 +35,14 @@ public class ClientK extends MainMenu implements Runnable {
 
 	private String kindOfMatch;
 	public String friendID;
+	public String myID;
+	
+	DBdata dbd = new DBdata();
+	
 	
 	public ClientK(String id) {
 		super(id);
+		myID = id;
 		setting();
 		fg = new FriendGUI(data, this);
 		tp.add("친구 목록", fg);
@@ -108,7 +114,11 @@ public class ClientK extends MainMenu implements Runnable {
 		}
 		if(kindOfMatch == "friend") {
 			
+			dbd.putResult(myID, friendID, score1, score2);
+			
 		} else if(kindOfMatch == "special") {
+			
+			dbd.putResult(myID, score1, score2);
 			
 		} 
 		kindOfMatch = null;

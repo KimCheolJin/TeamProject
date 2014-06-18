@@ -52,6 +52,7 @@ public class DBdata {
 		DBconn.close();
 	}
 	
+	//old선수 구매시 new선수 구매와 마찬가지로 사용자_PLAYER로 정보보냄
     public void putOldPlayer(Player p, String id){
 		
 		Connection conn = DBconn.getConnection();
@@ -64,7 +65,7 @@ public class DBdata {
 
 			try {
 				
-				//old선수 구매시 new선수 구매와 마찬가지로 사용자_PLAYER로 정보보냄
+				
 				String sql = "INSERT INTO "+id+"_PLAYER(pnum,pname,shoot,dribble,pass,"
 						+ "stamina,tackle,steal,speed,gk,exp)"
 						+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -104,6 +105,7 @@ public class DBdata {
 		DBconn.close();
 	}
     
+  //MARKET_PLAYER에 판매 할 선수 정보 전달
     public void sellPlayer(Player p, int pri, String id){
 		
 		Connection conn = DBconn.getConnection();
@@ -237,6 +239,7 @@ public class DBdata {
     	
     }
     
+    //팀변경사항(전술부분) DB에 전송
     public void UpdateUserTeam(Team t,String id){
     	
     	Connection conn = DBconn.getConnection();
@@ -275,6 +278,7 @@ public class DBdata {
 		DBconn.close();
     }
     
+    //훈련하기부분 전송
     public void UpdateUserPlayer(Team t,String id){
     	
     	Connection conn = DBconn.getConnection();
@@ -329,6 +333,204 @@ public class DBdata {
 		
 		DBconn.close();
     }
+    
+    //게임결과 DB로 전송(스페셜매치)
+    
+    public void putResult(String id, int myscore, int otherscore){
+    	
+    	Connection conn = DBconn.getConnection();
+
+		if (conn == null) {
+			System.out.println("데이터베이스 연결 실패!!");
+
+		} else {
+			System.out.println("데이터베이스 연결 성공!!");
+			
+			try{
+				
+				System.out.println("경기결과기록중!!");
+				
+				//update로 추가해주기 전에 미리 DB에있는 정보가져옴
+				
+				int win = 0;
+				int draw = 0;
+				int lose = 0;
+				int score = 0;
+				int point = 0;
+				
+				String sql = "SELECT * FROM UUSER WHERE UUID=?";
+				
+				PreparedStatement psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, id);
+				
+				ResultSet rs = null;
+				rs = psmt.executeQuery();
+				
+				while(rs.next()){
+					
+					win = rs.getInt(7);
+					draw = rs.getInt(8);
+					lose = rs.getInt(9);
+					score = rs.getInt(10);
+					point = rs.getInt(11);
+					
+				}
+				
+				//이제 스코어에따라 승,무,패값들 변경
+				if(myscore>otherscore){
+					win++;
+					point +=50;
+				}
+				else if(myscore==otherscore){
+					draw++;
+					
+				}
+				else{
+					lose++;
+					point -=50;
+				}
+				
+				//스코어추가
+				score += myscore;
+			
+				
+				//이제 다시 DB로 보내는부분
+				sql = "UPDATE UUSER "
+						+ "SET UWIN=?, UDRAW=?, ULOSE=?, USCORE=?, UPOINT=?"
+						+ "WHERE UUID=?";
+				
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setInt(1, win);
+				psmt.setInt(2, draw);
+				psmt.setInt(3, lose);
+				psmt.setInt(4, score);
+				psmt.setInt(5, point);
+				psmt.setString(6, id);
+				
+				psmt.executeUpdate();
+				
+				psmt.close();
+				
+				System.out.println("경기결과기록완료!!");
+				
+			}
+			catch(Exception e){
+				System.out.println(e.toString());
+			}
+			
+		}
+		
+		DBconn.close();
+    }
+    
+			
+    //게임결과 DB로 전송(친구와 게임)
+    public void putResult(String id, String friendid, int myscore, int friendscore){
+    	
+    	Connection conn = DBconn.getConnection();
+
+		if (conn == null) {
+			System.out.println("데이터베이스 연결 실패!!");
+
+		} else {
+			System.out.println("데이터베이스 연결 성공!!");
+			try{
+				
+				System.out.println("경기결과기록중!!");
+				
+				int win = 0;
+				int draw = 0;
+				int lose = 0;
+				int mscore = 0;
+				int fscore = 0;
+				
+				//DB에서 저장된 정보들 가져옴
+				
+				String sql = "SELECT * FROM FRIEND_RECORD WHERE ME = ? AND FRIEND = ?";
+				
+				PreparedStatement psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, id);
+				psmt.setString(2, friendid);
+				
+				ResultSet rs = null;
+				rs=psmt.executeQuery();
+				
+				while(rs.next()){
+					
+					win = rs.getInt(3);
+					draw = rs.getInt(4);
+					lose = rs.getInt(5);
+					mscore = rs.getInt(6);
+					fscore = rs.getInt(7);
+					
+				}
+				
+				//이제 변경된값 적용
+				if(myscore>friendscore){
+					win++;
+					
+				}
+				else if(myscore==friendscore){
+					draw++;
+				}
+				else{
+					lose++;
+				}
+				
+				//스코어변경
+				mscore+=myscore;
+				fscore+=friendscore;
+				
+				//이제 DB로 정보보내기
+				//(나,친구)부터보내기
+				sql = "UPDATE FRIEND_RECORD"
+						+ "SET WIN = ?, DRAW = ?, LOSE = ?, ME_SCORE = ?, FRIEND_SCORE =?"
+						+ "WHERE ME = ? AND FRIEND = ?";
+				
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setInt(1, win);
+				psmt.setInt(2, draw);
+				psmt.setInt(3, lose);
+				psmt.setInt(4, mscore);
+				psmt.setInt(5, fscore);
+				psmt.setString(6, id);
+				psmt.setString(7, friendid);
+				
+				psmt.executeUpdate();
+				
+				//(친구,나)에도 보내기
+				sql = "UPDATE FRIEND_RECORD"
+						+ "SET WIN = ?, DRAW = ?, LOSE = ?, ME_SCORE = ?, FRIEND_SCORE =?"
+						+ "WHERE ME = ? AND FRIEND = ?";
+				
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setInt(1, lose);
+				psmt.setInt(2, draw);
+				psmt.setInt(3, win);
+				psmt.setInt(4, fscore);
+				psmt.setInt(5, mscore);
+				psmt.setString(6, friendid);
+				psmt.setString(7, id);
+				
+				psmt.executeUpdate();
+				
+				psmt.close();
+				
+				System.out.println("경기결과기록완료!!");
+			}
+			catch(Exception e){
+				System.out.println(e.toString());
+			}
+		}
+		
+		DBconn.close();
+    }
+		
 				
 			
 

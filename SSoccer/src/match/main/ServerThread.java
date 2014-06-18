@@ -20,10 +20,15 @@ public class ServerThread extends MatchThread {
 	}
 	
 	public void run() {
-		super.run();
-		gm.dispose();
-		clientK.restartClient(home.score, away.score);
-	}
+	      super.run();
+	      try {
+	         oos.close();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	      gm.close();
+	      clientK.restartClient(home.score, away.score);
+	   }
 
 	public boolean write() {
 		try {
